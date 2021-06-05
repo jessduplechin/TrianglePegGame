@@ -8,7 +8,6 @@
 
 #include "board.h"
 #include <iostream>
-#include <string>
 
 bool checkArguments(const char *str);
 
@@ -50,7 +49,8 @@ int main(int argc, char *argv[]){
   std::cout << "Creating pegs..." << std::endl;
   board->createPegs();
 
-  board->displayPegs();
+  board->printInformation();
+  
   //TODO: start algorithm to find empty spaces and move pieces around
   std::cout << "Exiting..." << std::endl;
 }
@@ -61,9 +61,11 @@ bool checkArguments(const char *str){
   bool result = false;
 
   //Make sure that the arguments fulfill all requirements
+  //TODO: ADD CHECK TO MAKE SURE THAT STARTING SPACE POSITION IS SMALLER
+  //      THAN TOTAL NUMBER OF SPACES
   if(value > 0){
     result = true;
-  } 
+  }
   else{
     std::cout << "Error - Argument cannot be alphabetical, 0 or negative" << std::endl;
   }
