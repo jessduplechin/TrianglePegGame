@@ -35,7 +35,7 @@ int main(int argc, char *argv[]){
       return -1;
     }
   }
-  else{
+  else if(argc > 3){
     std::cout << "Error - Too many arguments" << std::endl;
     return -1;
   }
@@ -49,7 +49,8 @@ int main(int argc, char *argv[]){
   
   std::cout << "Creating pegs..." << std::endl;
   board->createPegs();
-  
+
+  board->displayPegs();
   //TODO: start algorithm to find empty spaces and move pieces around
   std::cout << "Exiting..." << std::endl;
 }
