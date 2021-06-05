@@ -1,3 +1,4 @@
 #Cmake stuff
 bin/
 build/
+*.txt
