@@ -23,7 +23,6 @@ class Board {
   int checkAdjacent();
   void createPegs();
   void recordMoves();
-  void displayBoard();
   void displayPegs();
   
  private:

@@ -68,6 +68,8 @@ void Board::createPegs(){
       Peg *peg = new Peg((*i)->getPosition());
       peg->setAdjacentPegs((*i)->getAdjacentSpace());
       pegs.push_back(peg);
+      //set space as not empty now
+      (*i)->setEmpty(false);
     }
   }//for - end
 }
@@ -76,14 +78,23 @@ void Board::recordMoves(){
 
 }
 
-void Board::displayBoard(){
-  int rowLength = 1;
-  for(int i = 0; i < boardSize; i++){
-    //    if(rowLength
-    std::cout << "[]" << std::endl;
-  }
-}
-
 void Board::displayPegs(){
-
+  int k = 0;
+  for(int i = 1; i <= this->boardSize; i++){
+    //Add spaces for alignment
+    for(int j = 0; j < (this->boardSize - i); j++){
+      std::cout << "   ";
+    }
+    //Show peg placement using spaces vector
+    for(int j = 0; j < i; j++){
+      if(!spaces.at(k)->getEmpty()){
+	std::cout << "[*]   ";
+      }
+      else{
+	std::cout << "[ ]   ";
+      }
+      k++;
+    }
+    std::cout << std::endl;
+  }//for(i..) - end
 }
