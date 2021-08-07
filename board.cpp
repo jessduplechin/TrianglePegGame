@@ -55,6 +55,7 @@ void Board::createBoard(){
 }
 
 int Board::findSpaces(){
+  //TODO: FIGURE OUT ALGORITHM HERE
   return 0;
 }
 

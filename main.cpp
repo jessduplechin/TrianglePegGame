@@ -13,6 +13,8 @@ bool checkArguments(const char *str);
 
 int main(int argc, char *argv[]){
   char *charPointer;
+
+  //default size
   int boardSize = 5;
   int startPegPos = 1;
   
