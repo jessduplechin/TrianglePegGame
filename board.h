@@ -28,6 +28,8 @@ class Board {
   std::string displaySpaces();
   std::string displayPegs();
   void printInformation();
+  void resetBoard();
+  void updateSpaces();
   
  private:
   int boardSize;

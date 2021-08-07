@@ -60,6 +60,28 @@ int Board::findSpaces(){
 }
 
 int Board::checkAdjacent(){
+
+  //TODO: MOVE THIS SOMEWHERE ELSE. THIS IS TEMPORARY TO DEMO 
+  // THE resetBoard FUNCTION.
+  std::cout << "jumping peg from pos 4 to pos 1" << std::endl;
+  std::vector<Peg*>::iterator i = pegs.begin() + 2;
+  std::cout << "peg pos = " << (*i)->getPegPos() << std::endl;
+  (*i)->setPegPos(1);
+
+  std::vector<Space*>::iterator j = spaces.begin() + 3;
+  std::cout << "space pos = " << (*j)->getPosition() << std::endl;
+  (*j)->setEmpty(true);
+  j = spaces.begin();
+  std::cout << "space pos = " << (*j)->getPosition() << std::endl;
+  (*j)->setEmpty(false);
+
+  (*i)->setAdjacentPegs((*j)->getAdjacentSpace());
+  i = pegs.begin();
+  pegs.erase(i);
+  j = spaces.begin() + 1;
+  std::cout << "space pos = " << (*j)->getPosition() << std::endl;
+  (*j)->setEmpty(true);
+
   return 0;
 }
 
@@ -77,7 +99,7 @@ void Board::createPegs(){
 }
 
 void Board::recordMoves(){
-
+  //TODO: FILL IN 
 }
 
 std::string Board::displayBoard(){
@@ -172,4 +194,20 @@ void Board::printInformation(){
   else{
     std::cout << "Error - Couldn't open file" << std::endl;
   }
+}
+
+void Board::resetBoard(){
+  //reset spaces vector to original state
+  for(std::vector<Space*>::iterator i = spaces.begin();
+      i != spaces.end(); i++){
+    (*i)->setEmpty(true);
+  }//for - end
+  
+  //Remove all pegs and create new ones
+  pegs.clear();
+  createPegs();
+}
+
+void Board::updateSpaces(){
+  //TODO: FILL IN
 }

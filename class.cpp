@@ -11,7 +11,8 @@ Peg::Peg(int position){
 }
 
 void Peg::jump(int pos){
-  //TODO: FILL IN
+  this->position = pos;
+  //TODO: REMOVE PEG THAT IT JUMPED OVER
 }
 
 int Peg::getPegPos(){
