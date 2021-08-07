@@ -66,6 +66,7 @@ int Board::checkAdjacent(){
   //reset pegs
   std::cout << "jumping peg from pos 4 to pos 1" << std::endl;
   std::vector<Peg*>::iterator i = pegs.begin() + 2;
+  std::vector<Space*>::iterator j = spaces.begin() + 3;
   std::cout << "peg pos = " << (*i)->getPegPos() << std::endl;
   (*i)->setPegPos(1);
   (*i)->setAdjacentPegs((*j)->getAdjacentSpace());
