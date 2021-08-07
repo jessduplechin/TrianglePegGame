@@ -12,8 +12,7 @@
 bool checkArguments(const char *str);
 
 int main(int argc, char *argv[]){
-  char *charPointer;
-
+  
   //default size
   int boardSize = 5;
   int startPegPos = 1;
@@ -28,11 +27,18 @@ int main(int argc, char *argv[]){
     }
   }
   else if(argc == 3){
-    if(checkArguments(argv[1]) && checkArguments(argv[2])){
+    int totalSpaces = 0;
+    for(int i = 1; i <= boardSize; i++){
+      totalSpaces += i;
+    }
+    if(checkArguments(argv[1]) && 
+       checkArguments(argv[2]) && 
+       startPegPos <= totalSpaces){
       boardSize = std::stoi(argv[1]);
       startPegPos = std::stoi(argv[2]);
     }
     else{
+      std::cout << "Error - Starting position exceeds size of board" << std::endl;
       return -1;
     }
   }

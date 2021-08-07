@@ -2,6 +2,9 @@
   Name: Jessica Duplechin
   Date: 05/08/2021
   Description: This file implements the space class routines for the game.
+               -1 means that the position hasn't been determined.
+               0  means that the position is invalid and doesn't physically exist.
+               Any other number indicates the position of the space on the board.
 */
 
 #include "space.h"
