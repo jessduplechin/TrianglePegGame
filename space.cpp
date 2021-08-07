@@ -2,6 +2,9 @@
   Name: Jessica Duplechin
   Date: 05/08/2021
   Description: This file implements the space class routines for the game.
+               -1 means that the position hasn't been determined.
+               0  means that the position is invalid and doesn't physically exist.
+               Any other number indicates the position of the space on the board.
 */
 
 #include "space.h"
@@ -66,36 +69,36 @@ void Space::setAdjacentSpace(int boardSize, int totalSpaces){
     if(adjacentSpace[pos] == -1){
       int row = 0;
       for(int i = 0; i < vec.size(); i++){
-	for(int j = 0; j < vec.at(i).size(); j++){
-	  if(vec.at(i).at(j) == this->position){
-	    row = i + 1;
-	    break;
-	  }
-	}//for - end
+        for(int j = 0; j < vec.at(i).size(); j++){
+          if(vec.at(i).at(j) == this->position){
+            row = i + 1;
+            break;
+          }
+        }//for - end
       }//for - end
 
       switch (pos){
       case UL:
-	adjacentSpace[pos] = this->position - row;
-	break;
+        adjacentSpace[pos] = this->position - row;
+        break;
       case UR:
-	adjacentSpace[pos] = (this->position - row) + 1;
-	break;
+        adjacentSpace[pos] = (this->position - row) + 1;
+        break;
       case L:
-	adjacentSpace[pos] = this->position - 1;
-	break;
+        adjacentSpace[pos] = this->position - 1;
+        break;
       case R:
-	adjacentSpace[pos] = this->position + 1;
-	break;
+        adjacentSpace[pos] = this->position + 1;
+        break;
       case LL:
-	adjacentSpace[pos] = this->position + row;
-	break;
+        adjacentSpace[pos] = this->position + row;
+        break;
       case LR:
-	adjacentSpace[pos] = (this->position + row) + 1;
-	break;
+        adjacentSpace[pos] = (this->position + row) + 1;
+        break;
       default:
-	adjacentSpace[pos] = 100;
-	break;
+        adjacentSpace[pos] = 100;
+        break;
       }
     }//if - end
   }//for - end 

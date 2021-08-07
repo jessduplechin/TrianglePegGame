@@ -8,12 +8,12 @@
 
 #include "board.h"
 #include <iostream>
-#include <string>
 
 bool checkArguments(const char *str);
 
 int main(int argc, char *argv[]){
-  char *charPointer;
+  
+  //default size
   int boardSize = 5;
   int startPegPos = 1;
   
@@ -27,11 +27,18 @@ int main(int argc, char *argv[]){
     }
   }
   else if(argc == 3){
-    if(checkArguments(argv[1]) && checkArguments(argv[2])){
+    int totalSpaces = 0;
+    for(int i = 1; i <= std::stoi(argv[1]); i++){
+      totalSpaces += i;
+    }
+    if(checkArguments(argv[1]) && 
+       checkArguments(argv[2]) && 
+       std::stoi(argv[2]) <= totalSpaces){
       boardSize = std::stoi(argv[1]);
       startPegPos = std::stoi(argv[2]);
     }
     else{
+      std::cout << "Error - Starting position exceeds size of board" << std::endl;
       return -1;
     }
   }
@@ -50,7 +57,13 @@ int main(int argc, char *argv[]){
   std::cout << "Creating pegs..." << std::endl;
   board->createPegs();
 
-  board->displayPegs();
+  //board->printInformation();
+  std::cout << board->displayBoard() << std::endl;
+  board->checkAdjacent();
+  std::cout << board->displayBoard() << std::endl;
+  board->resetBoard();
+  std::cout << board->displayBoard() << std::endl;
+  
   //TODO: start algorithm to find empty spaces and move pieces around
   std::cout << "Exiting..." << std::endl;
 }
@@ -61,9 +74,11 @@ bool checkArguments(const char *str){
   bool result = false;
 
   //Make sure that the arguments fulfill all requirements
+  //TODO: ADD CHECK TO MAKE SURE THAT STARTING SPACE POSITION IS SMALLER
+  //      THAN TOTAL NUMBER OF SPACES
   if(value > 0){
     result = true;
-  } 
+  }
   else{
     std::cout << "Error - Argument cannot be alphabetical, 0 or negative" << std::endl;
   }

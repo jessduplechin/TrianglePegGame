@@ -7,6 +7,7 @@
 
 #include "board.h"
 #include <iostream>
+#include <fstream>
 
 Board::Board(int startingSpace, int boardSize){
   //default starting position of space is at 1  
@@ -54,10 +55,33 @@ void Board::createBoard(){
 }
 
 int Board::findSpaces(){
+  //TODO: FIGURE OUT ALGORITHM HERE
   return 0;
 }
 
 int Board::checkAdjacent(){
+
+  //TODO: MOVE THIS SOMEWHERE ELSE. THIS IS TEMPORARY TO DEMO 
+  // THE resetBoard FUNCTION.
+  std::cout << "jumping peg from pos 4 to pos 1" << std::endl;
+  std::vector<Peg*>::iterator i = pegs.begin() + 2;
+  std::cout << "peg pos = " << (*i)->getPegPos() << std::endl;
+  (*i)->setPegPos(1);
+
+  std::vector<Space*>::iterator j = spaces.begin() + 3;
+  std::cout << "space pos = " << (*j)->getPosition() << std::endl;
+  (*j)->setEmpty(true);
+  j = spaces.begin();
+  std::cout << "space pos = " << (*j)->getPosition() << std::endl;
+  (*j)->setEmpty(false);
+
+  (*i)->setAdjacentPegs((*j)->getAdjacentSpace());
+  i = pegs.begin();
+  pegs.erase(i);
+  j = spaces.begin() + 1;
+  std::cout << "space pos = " << (*j)->getPosition() << std::endl;
+  (*j)->setEmpty(true);
+
   return 0;
 }
 
@@ -75,26 +99,115 @@ void Board::createPegs(){
 }
 
 void Board::recordMoves(){
-
+  //TODO: FILL IN 
 }
 
-void Board::displayPegs(){
+std::string Board::displayBoard(){
   int k = 0;
+  std::string output;
+
+  //TODO: ADD WAY TO PRINT OUT SPACE POSITION TOO
   for(int i = 1; i <= this->boardSize; i++){
     //Add spaces for alignment
     for(int j = 0; j < (this->boardSize - i); j++){
-      std::cout << "   ";
+      output.append("   ");
     }
     //Show peg placement using spaces vector
     for(int j = 0; j < i; j++){
       if(!spaces.at(k)->getEmpty()){
-	std::cout << "[*]   ";
+        output.append("[*]   ");
       }
       else{
-	std::cout << "[ ]   ";
+        output.append("[ ]   ");
       }
       k++;
     }
-    std::cout << std::endl;
+    output.append("\n");
   }//for(i..) - end
+
+  return output;
+}
+
+std::string Board::displaySpaces(){
+  std::string output;
+  for(std::vector<Space*>::iterator i = spaces.begin();
+      i != spaces.end(); i++){
+    output.append("Space Position: " + std::to_string((*i)->getPosition())
+                  + "\n");
+    output.append("Space Empty: " + std::to_string((*i)->getEmpty()) + "\n");
+    output.append("Space Adjacent UL: " +
+                  std::to_string((*i)->getAdjacentSpace()[UL]) + "\n");
+    output.append("Space Adjacent UR: " +
+                  std::to_string((*i)->getAdjacentSpace()[UR]) + "\n");
+    output.append("Space Adjacent L: " +
+                  std::to_string((*i)->getAdjacentSpace()[L]) + "\n");
+    output.append("Space Adjacent R: " +
+                  std::to_string((*i)->getAdjacentSpace()[R]) + "\n");
+    output.append("Space Adjacent LL: " +
+                  std::to_string((*i)->getAdjacentSpace()[LL]) + "\n");
+    output.append("Space Adjacent LR: " +
+                  std::to_string((*i)->getAdjacentSpace()[LR]) + "\n");
+    output.append("\n");
+  }//for - end
+    
+  return output;
+}
+
+std::string Board::displayPegs(){
+  std::string output;
+  for(std::vector<Peg*>::iterator i = pegs.begin();
+      i != pegs.end(); i++){
+    output.append("Peg Position: " + std::to_string((*i)->getPegPos())
+                  + "\n");
+    output.append("Peg Adjacent UL: " +
+                  std::to_string((*i)->getAdjacentPegs()[UL]) + "\n");
+    output.append("Peg Adjacent UR: " +
+                  std::to_string((*i)->getAdjacentPegs()[UR]) + "\n");
+    output.append("Peg Adjacent L: " +
+                  std::to_string((*i)->getAdjacentPegs()[L]) + "\n");
+    output.append("Peg Adjacent R: " +
+                  std::to_string((*i)->getAdjacentPegs()[R]) + "\n");
+    output.append("Peg Adjacent LL: " +
+                  std::to_string((*i)->getAdjacentPegs()[LL]) + "\n");
+    output.append("Peg Adjacent LR: " +
+                  std::to_string((*i)->getAdjacentPegs()[LR]) + "\n");
+    output.append("\n");
+  }//for - end
+  
+  return output;
+}
+
+void Board::printInformation(){
+  //Print everything onto text files
+  std::ofstream outFile("information.txt");
+
+  if(outFile.is_open()){
+    outFile << displayBoard();
+    outFile << "----------------------------------------\n";
+    outFile << displaySpaces();
+    outFile << "----------------------------------------\n";
+    outFile << displayPegs();
+    //TODO: ADD OTHER THINGS TO DISPLAY; MOVES, SOLUTIONS
+    
+    outFile.close();
+  }
+  else{
+    std::cout << "Error - Couldn't open file" << std::endl;
+  }
+}
+
+void Board::resetBoard(){
+  //reset spaces vector to original state
+  for(std::vector<Space*>::iterator i = spaces.begin();
+      i != spaces.end(); i++){
+    (*i)->setEmpty(true);
+  }//for - end
+  
+  //Remove all pegs and create new ones
+  pegs.clear();
+  createPegs();
+}
+
+void Board::updateSpaces(){
+  //TODO: FILL IN
 }

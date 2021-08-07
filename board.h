@@ -14,6 +14,7 @@
 #include <vector>
 #include "class.h"
 #include "space.h"
+#include <string>
 
 class Board {
  public:
@@ -23,7 +24,12 @@ class Board {
   int checkAdjacent();
   void createPegs();
   void recordMoves();
-  void displayPegs();
+  std::string displayBoard();
+  std::string displaySpaces();
+  std::string displayPegs();
+  void printInformation();
+  void resetBoard();
+  void updateSpaces();
   
  private:
   int boardSize;
