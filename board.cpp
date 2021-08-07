@@ -93,10 +93,10 @@ std::string Board::displayBoard(){
     //Show peg placement using spaces vector
     for(int j = 0; j < i; j++){
       if(!spaces.at(k)->getEmpty()){
-	output.append("[*]   ");
+        output.append("[*]   ");
       }
       else{
-	output.append("[ ]   ");
+        output.append("[ ]   ");
       }
       k++;
     }
@@ -111,20 +111,20 @@ std::string Board::displaySpaces(){
   for(std::vector<Space*>::iterator i = spaces.begin();
       i != spaces.end(); i++){
     output.append("Space Position: " + std::to_string((*i)->getPosition())
-		  + "\n");
+                  + "\n");
     output.append("Space Empty: " + std::to_string((*i)->getEmpty()) + "\n");
     output.append("Space Adjacent UL: " +
-		  std::to_string((*i)->getAdjacentSpace()[UL]) + "\n");
+                  std::to_string((*i)->getAdjacentSpace()[UL]) + "\n");
     output.append("Space Adjacent UR: " +
-		  std::to_string((*i)->getAdjacentSpace()[UR]) + "\n");
+                  std::to_string((*i)->getAdjacentSpace()[UR]) + "\n");
     output.append("Space Adjacent L: " +
-		  std::to_string((*i)->getAdjacentSpace()[L]) + "\n");
+                  std::to_string((*i)->getAdjacentSpace()[L]) + "\n");
     output.append("Space Adjacent R: " +
-		  std::to_string((*i)->getAdjacentSpace()[R]) + "\n");
+                  std::to_string((*i)->getAdjacentSpace()[R]) + "\n");
     output.append("Space Adjacent LL: " +
-		  std::to_string((*i)->getAdjacentSpace()[LL]) + "\n");
+                  std::to_string((*i)->getAdjacentSpace()[LL]) + "\n");
     output.append("Space Adjacent LR: " +
-		  std::to_string((*i)->getAdjacentSpace()[LR]) + "\n");
+                  std::to_string((*i)->getAdjacentSpace()[LR]) + "\n");
     output.append("\n");
   }//for - end
     
@@ -136,19 +136,19 @@ std::string Board::displayPegs(){
   for(std::vector<Peg*>::iterator i = pegs.begin();
       i != pegs.end(); i++){
     output.append("Peg Position: " + std::to_string((*i)->getPegPos())
-		  + "\n");
+                  + "\n");
     output.append("Peg Adjacent UL: " +
-		  std::to_string((*i)->getAdjacentPegs()[UL]) + "\n");
+                  std::to_string((*i)->getAdjacentPegs()[UL]) + "\n");
     output.append("Peg Adjacent UR: " +
-		  std::to_string((*i)->getAdjacentPegs()[UR]) + "\n");
+                  std::to_string((*i)->getAdjacentPegs()[UR]) + "\n");
     output.append("Peg Adjacent L: " +
-		  std::to_string((*i)->getAdjacentPegs()[L]) + "\n");
+                  std::to_string((*i)->getAdjacentPegs()[L]) + "\n");
     output.append("Peg Adjacent R: " +
-		  std::to_string((*i)->getAdjacentPegs()[R]) + "\n");
+                  std::to_string((*i)->getAdjacentPegs()[R]) + "\n");
     output.append("Peg Adjacent LL: " +
-		  std::to_string((*i)->getAdjacentPegs()[LL]) + "\n");
+                  std::to_string((*i)->getAdjacentPegs()[LL]) + "\n");
     output.append("Peg Adjacent LR: " +
-		  std::to_string((*i)->getAdjacentPegs()[LR]) + "\n");
+                  std::to_string((*i)->getAdjacentPegs()[LR]) + "\n");
     output.append("\n");
   }//for - end
   
