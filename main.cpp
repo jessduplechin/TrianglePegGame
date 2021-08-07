@@ -57,7 +57,12 @@ int main(int argc, char *argv[]){
   std::cout << "Creating pegs..." << std::endl;
   board->createPegs();
 
-  board->printInformation();
+  //board->printInformation();
+  board->displayBoard();
+  board->checkAdjacent();
+  board->displayBoard();
+  board->resetBoard();
+  board->displayBoard();
   
   //TODO: start algorithm to find empty spaces and move pieces around
   std::cout << "Exiting..." << std::endl;

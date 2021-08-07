@@ -60,7 +60,7 @@ int Board::findSpaces(){
 }
 
 int Board::checkAdjacent(){
-  //TODO: FILL IN
+  pegs.at(3)->jump(1);
   return 0;
 }
 
@@ -177,7 +177,15 @@ void Board::printInformation(){
 
 void Board::resetBoard(){
 	//TODO; FILL IN
-	//reset spaces vector to original state
-	//delete all pegs from the pegs vector and create new ones according to spaces vector state
-	
+		
+  //reset spaces vector to original state
+  for(std::vector<Space*>::iterator i = spaces.begin();
+      i != spaces.end(); i++){
+    (*i)->setEmpty(true);
+  }//for - end
+  
+  //Remove all pegs and create new ones
+  pegs.clear();
+  createPegs();
+  
 }
