@@ -33,7 +33,7 @@ int main(int argc, char *argv[]){
     }
     if(checkArguments(argv[1]) && 
        checkArguments(argv[2]) && 
-       startPegPos <= totalSpaces){
+       std::stoi(argv[2]) <= totalSpaces){
       boardSize = std::stoi(argv[1]);
       startPegPos = std::stoi(argv[2]);
     }
