@@ -60,7 +60,25 @@ int Board::findSpaces(){
 }
 
 int Board::checkAdjacent(){
-  pegs.at(3)->jump(1);
+  std::cout << "jumping peg from pos 4 to pos 1" << std::endl;
+  std::vector<Peg*>::iterator i = pegs.begin() + 2;
+  std::cout << "peg pos = " << (*i)->getPegPos() << std::endl;
+  (*i)->setPegPos(1);
+
+  std::vector<Space*>::iterator j = spaces.begin() + 3;
+  std::cout << "space pos = " << (*j)->getPosition() << std::endl;
+  (*j)->setEmpty(true);
+  j = spaces.begin();
+  std::cout << "space pos = " << (*j)->getPosition() << std::endl;
+  (*j)->setEmpty(false);
+
+  (*i)->setAdjacentPegs((*j)->getAdjacentSpace());
+  i = pegs.begin();
+  pegs.erase(i);
+  j = spaces.begin() + 1;
+  std::cout << "space pos = " << (*j)->getPosition() << std::endl;
+  (*j)->setEmpty(true);
+
   return 0;
 }
 
@@ -176,8 +194,8 @@ void Board::printInformation(){
 }
 
 void Board::resetBoard(){
-	//TODO; FILL IN
-		
+        //TODO; FILL IN
+                
   //reset spaces vector to original state
   for(std::vector<Space*>::iterator i = spaces.begin();
       i != spaces.end(); i++){
