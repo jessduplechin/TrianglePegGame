@@ -47,6 +47,7 @@ int main(int argc, char *argv[]){
     return -1;
   }
 
+  //Creation
   std::cout << "Board size = " << boardSize << std::endl;
   std::cout << "Starting peg position = " << startPegPos << std::endl;
   std::cout << "Creating board..." << std::endl;
@@ -60,6 +61,21 @@ int main(int argc, char *argv[]){
   board->printInformation();
   
   //TODO: start algorithm to find empty spaces and move pieces around
+  /*
+  thinking space
+  1) use for loop and go through all spaces 
+  2) if space has a peg, then check adjacent spaces for pegs. 
+  3) if adjacent space has a peg, then check its adjacent space for peg.
+  4) if no peg in adjacent space then jump original peg to final adjacent space. 
+  5) repeat until no more moves can be done.
+  6) Repeat until shortest path of all game sessions is found
+  
+  Issues: how to check which adjacent space first? Otherwise it'll take the first adjacent space it sees
+          which will always be the same for every new run which will create the same singular result. 
+		  
+  Possible resolutions: Use random number generator to 		  
+  */
+  
   std::cout << "Exiting..." << std::endl;
 }
 
@@ -68,9 +84,7 @@ bool checkArguments(const char *str){
   int value = strtol(str, &charPointer, 10);
   bool result = false;
 
-  //Make sure that the arguments fulfill all requirements
-  //TODO: ADD CHECK TO MAKE SURE THAT STARTING SPACE POSITION IS SMALLER
-  //      THAN TOTAL NUMBER OF SPACES
+  //Make sure that the arguments fulfill all requirements  
   if(value > 0){
     result = true;
   }
