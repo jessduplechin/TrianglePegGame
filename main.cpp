@@ -28,7 +28,7 @@ int main(int argc, char *argv[]){
   }
   else if(argc == 3){
     int totalSpaces = 0;
-    for(int i = 1; i <= boardSize; i++){
+    for(int i = 1; i <= std::stoi(argv[1]); i++){
       totalSpaces += i;
     }
     if(checkArguments(argv[1]) && 
