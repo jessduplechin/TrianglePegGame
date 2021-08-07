@@ -63,24 +63,17 @@ int Board::checkAdjacent(){
 
   //TODO: MOVE THIS SOMEWHERE ELSE. THIS IS TEMPORARY TO DEMO 
   // THE resetBoard FUNCTION.
+  //reset pegs
   std::cout << "jumping peg from pos 4 to pos 1" << std::endl;
   std::vector<Peg*>::iterator i = pegs.begin() + 2;
   std::cout << "peg pos = " << (*i)->getPegPos() << std::endl;
   (*i)->setPegPos(1);
-
-  std::vector<Space*>::iterator j = spaces.begin() + 3;
-  std::cout << "space pos = " << (*j)->getPosition() << std::endl;
-  (*j)->setEmpty(true);
-  j = spaces.begin();
-  std::cout << "space pos = " << (*j)->getPosition() << std::endl;
-  (*j)->setEmpty(false);
-
   (*i)->setAdjacentPegs((*j)->getAdjacentSpace());
   i = pegs.begin();
   pegs.erase(i);
-  j = spaces.begin() + 1;
-  std::cout << "space pos = " << (*j)->getPosition() << std::endl;
-  (*j)->setEmpty(true);
+
+  //update spaces  
+  updateSpaces(4, 2, 1);
 
   return 0;
 }
@@ -208,6 +201,22 @@ void Board::resetBoard(){
   createPegs();
 }
 
-void Board::updateSpaces(){
-  //TODO: FILL IN
+void Board::updateSpaces(int origin, int between, int destination){
+  for(std::vector<Space*>::iterator i = spaces.begin();
+      i != spaces.end(); i++){
+	if((*i)->getPosition() == origin ||
+	   (*i)->getPosition() == between){
+      (*i)->setEmpty(true);
+	}
+	else if((*i)->getPosition() == destination){
+	  (*i)->setEmpty(false);
+	}
+  }//for - end
 }
+
+
+
+
+
+
+
