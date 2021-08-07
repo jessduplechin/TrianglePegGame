@@ -60,6 +60,7 @@ int Board::findSpaces(){
 }
 
 int Board::checkAdjacent(){
+  //TODO: FILL IN
   return 0;
 }
 
@@ -77,7 +78,7 @@ void Board::createPegs(){
 }
 
 void Board::recordMoves(){
-
+  //TODO: FILL IN 
 }
 
 std::string Board::displayBoard(){
@@ -172,4 +173,11 @@ void Board::printInformation(){
   else{
     std::cout << "Error - Couldn't open file" << std::endl;
   }
+}
+
+void Board::resetBoard(){
+	//TODO; FILL IN
+	//reset spaces vector to original state
+	//delete all pegs from the pegs vector and create new ones according to spaces vector state
+	
 }
