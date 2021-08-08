@@ -61,9 +61,14 @@ void Board::createBoard(){
   }//for - end
 }
 
-int Board::findSpaces(){
-  //TODO: FIGURE OUT ALGORITHM HERE
-  return 0;
+std::vector<Space*>& Board::findSpaces(){  
+  std::vector<int> emptySpaces;
+  for(int i = 1; i <= this->totalSpaces; i++){
+	if(spaces[i]->getEmpty()){
+      emptySpaces.push_back(i);
+	}
+  }
+  return emptySpaces;
 }
 
 int Board::checkAdjacent(){
@@ -193,18 +198,20 @@ void Board::start(){
   int betweenPos;
   int destPos;
   bool possibleMoves;
-
+  std::vector<int> emptySpaces;
+  
   checkAdjacent();  //TODO: REMOVE FOR DEBUGGING ONLY
   
-  for(int i = 1; i <= this->totalSpaces; i++){
+  emptySpaces = findSpaces();
+  
+//  for(int i = 1; i <= this->totalSpaces; i++){
+  for(int i = 0; i < emptySpaces.size(); i++){
     Space *firstSpace;
     Space *adjacentSpace;
     Space *secondAdjSpace;
     std::vector<int> validAdjacentPos;
-      
-    //Find the first empty space
-    if(spaces[i]->getEmpty()){
-      destPos = i;
+          
+      destPos = emptySpaces.at(i);
       firstSpace = spaces[destPos];
       
       //Get all valid adjacent spaces that are not empty
@@ -252,7 +259,6 @@ void Board::start(){
         } 
       }//if(..size() > 0) - end
       
-      
-    }//if(..getEmpty()) - end
+          
   }//for - end
 }
