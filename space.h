@@ -1,7 +1,7 @@
 /*
   Name: Jessica Duplechin
   Date: 05/08/2021
-  Description: This file defines the space class for the game.
+  Description: This file declares the space class for the game.
 */
 #ifndef SPACE_H
 #define SPACE_H

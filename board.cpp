@@ -115,8 +115,6 @@ std::string Board::displayBoard(){
 
 std::string Board::displaySpaces(){
   std::string output;
-  //for(std::vector<Space*>::iterator i = spaces.begin();
-    //  i != spaces.end(); i++){
   for(int i = 1; i <= this->totalSpaces; i++){
     output.append("Space Position: " + std::to_string(i) + "\n");
     output.append("Space Empty: " + std::to_string(spaces[i]->getEmpty()) + "\n");
@@ -158,8 +156,6 @@ void Board::printInformation(){
 
 void Board::resetBoard(){
   //reset spaces vector to original state
-  //for(std::vector<Space*>::iterator i = spaces.begin();
-      //i != spaces.end(); i++){
   for(int i = 1; i <= this->totalSpaces; i++){ 
     if(i != this->startingSpace){
       spaces[i]->setEmpty(false);
@@ -176,17 +172,6 @@ void Board::updateSpaces(int origin, int between, int destination){
     return;
   }
   
-  /*for(std::vector<Space*>::iterator i = spaces.begin();
-      i != spaces.end(); i++){
-        if((*i)->getPosition() == origin ||
-           (*i)->getPosition() == between){
-      (*i)->setEmpty(true);
-        }
-        else if((*i)->getPosition() == destination){
-          (*i)->setEmpty(false);
-        }
-  }//for - end
-*/
   spaces[origin]->setEmpty(true);
   spaces[between]->setEmpty(true);
   spaces[destination]->setEmpty(false);
