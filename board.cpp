@@ -65,14 +65,10 @@ int Board::checkAdjacent(){
   // THE resetBoard FUNCTION.
   //reset pegs
   std::cout << "jumping peg from pos 4 to pos 1" << std::endl;
-  std::vector<Peg*>::iterator i = pegs.begin() + 2;
-  std::vector<Space*>::iterator j = spaces.begin() + 3;
-  std::cout << "peg pos = " << (*i)->getPegPos() << std::endl;
-  (*i)->setPegPos(1);
-  (*i)->setAdjacentPegs((*j)->getAdjacentSpace());
-  i = pegs.begin();
-  pegs.erase(i);
-
+  updatePegs(4, 2, 2);
+  updateSpaces(4, 4, 1);
+  
+  updatePegs(4, 2, 1);
   //update spaces  
   updateSpaces(4, 2, 1);
 
@@ -203,19 +199,50 @@ void Board::resetBoard(){
 }
 
 void Board::updateSpaces(int origin, int between, int destination){
+  if(origin == between || origin == destination || between == destination){
+    std::cout << "Error - origin, between, or destination are same values" << std::endl;
+    return;
+  }
+  
   for(std::vector<Space*>::iterator i = spaces.begin();
       i != spaces.end(); i++){
-	if((*i)->getPosition() == origin ||
-	   (*i)->getPosition() == between){
+        if((*i)->getPosition() == origin ||
+           (*i)->getPosition() == between){
       (*i)->setEmpty(true);
-	}
-	else if((*i)->getPosition() == destination){
-	  (*i)->setEmpty(false);
-	}
+        }
+        else if((*i)->getPosition() == destination){
+          (*i)->setEmpty(false);
+        }
   }//for - end
 }
 
+void Board::updatePegs(int origin, int between, int destination){
+  std::vector<Peg*>::iterator temp;
 
+  if(origin == between || origin == destination || between == destination){
+    std::cout << "Error - origin, between, or destination are same values" << std::endl;
+    return;
+  }
+  
+  for(std::vector<Peg*>::iterator i = pegs.begin();
+      i != pegs.end(); i++){
+    if((*i)->getPegPos() == origin){
+      (*i)->setPegPos(destination);
+      temp = i;
+    }
+    else if((*i)->getPegPos() == between){
+      pegs.erase(i);
+    }
+  }//for - end
+  
+  for(std::vector<Space*>::iterator i = spaces.begin();
+      i != spaces.end(); i++){
+    if((*temp)->getPegPos() == (*i)->getPosition()){
+      (*temp)->setAdjacentPegs((*i)->getAdjacentSpace());
+      break;
+    }
+  }//for - end
+}
 
 
 

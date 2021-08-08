@@ -10,11 +10,6 @@ Peg::Peg(int position){
   this->position = position;
 }
 
-void Peg::jump(int pos){
-  this->position = pos;
-  //TODO: REMOVE PEG THAT IT JUMPED OVER
-}
-
 int Peg::getPegPos(){
   return position;
 }
