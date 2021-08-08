@@ -47,7 +47,7 @@ int main(int argc, char *argv[]){
     break;
   default:
     std::cout << "Error - Too many arguments" << std::endl;
-    break;
+    return -1;
   }
   
   //Creation
