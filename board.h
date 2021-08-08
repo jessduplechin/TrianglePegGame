@@ -29,7 +29,9 @@ class Board {
   void printInformation();
   void resetBoard();
   void updateSpaces(int origin, int between, int destination);
+  Position getSpaceCorrelation(int orig, int dest);
   void start();
+  
   
  private:
   int boardSize;
