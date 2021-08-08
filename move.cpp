@@ -18,3 +18,11 @@ void Move::setOrigin(int origin){
 void Move::setDestination(int destination){
   this->destination = destination;
 }
+
+int Move::getOrigin(){
+  return this->origin;
+}
+
+int Move::getDestination(){
+  return this->destination;
+}

@@ -60,22 +60,18 @@ int main(int argc, char *argv[]){
   
   Board *board = new Board(startPegPos, boardSize);
   board->createBoard();
-  //  board->start();
-
-  board->printInformation();
+  
   board->checkAdjacent();
-  std::cout << board->displayBoard() << std::endl;
-  std::cout << board->displaySpaces() << std::endl;
-
+  std::cout << board->displayMoves() << std::endl;
   
   
   //TODO: start algorithm to find empty spaces and move pieces around
   /*
   thinking space
   1) use for loop and go through all spaces 
-  2) if space is not empty, then check adjacent spaces for emptiness. 
-  3) if adjacent space is not empty, then check its adjacent space for emptiness.
-  4) if adjacent space is empty, then jump original peg to final adjacent space. 
+  2) if space is empty, then check adjacent spaces for emptiness. 
+  3) if adjacent space is not empty, then check its secondary adjacent space for emptiness.
+  4) if secondary adjacent space is not empty, then jump that occupied space to first space found. 
   5) repeat until no more moves can be done.
   6) Repeat until shortest path of all game sessions is found
   

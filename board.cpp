@@ -71,7 +71,7 @@ int Board::checkAdjacent(){
 
   //TODO: MOVE THIS SOMEWHERE ELSE. THIS IS TEMPORARY TO DEMO 
   // THE resetBoard FUNCTION.
-  std::cout << "jumping peg from pos 4 to pos 1" << std::endl;
+  /*std::cout << "jumping peg from pos 4 to pos 1" << std::endl;
   updateSpaces(4, 4, 1);
   updateSpaces(4, 1, 4);
   updateSpaces(1, 4, 4);
@@ -79,7 +79,11 @@ int Board::checkAdjacent(){
   //update spaces  
   updateSpaces(4, 2, 1);
   updateSpaces(9, 5, 2);
-
+*/
+  //add test moves to moves array
+	moves.push_back(new Move(3, 4));
+	moves.push_back(new Move(10, 2));
+	moves.push_back(new Move(7, 6));
   return 0;
 }
 
@@ -133,6 +137,17 @@ std::string Board::displaySpaces(){
     output.append("\n");
   }//for - end
     
+  return output;
+}
+
+std::string Board::displayMoves(){
+  std::string output;
+  
+  for(std::vector<Move*>::iterator i = moves.begin(); 
+      i != moves.end(); i++){
+	  output.append((*i)->getOrigin() + " -> " + (*i)->getDestination() + "\n");
+  }
+  
   return output;
 }
 
