@@ -28,8 +28,7 @@ class Move {
 
 class Peg {
  public:
-  Peg(int position = 1);
-  void jump(int pos);
+  Peg(int position = 1); 
   int getPegPos();
   void setPegPos(int position);
   std::map<Position, int>& getAdjacentPegs();
