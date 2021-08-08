@@ -60,8 +60,8 @@ int main(int argc, char *argv[]){
   
   Board *board = new Board(startPegPos, boardSize);
   board->createBoard();
-  
-  board->checkAdjacent();
+
+  board->start();
   board->printInformation();
   
   //TODO: start algorithm to find empty spaces and move pieces around
