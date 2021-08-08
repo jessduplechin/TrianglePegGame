@@ -62,6 +62,11 @@ int main(int argc, char *argv[]){
   board->createBoard();
   //  board->start();
   
+  board->printInformation();
+  board->checkAdjacent();
+  std::cout << board->displayBoard() << std::endl;
+  std::cout << board->displaySpaces() << std::endl;
+
   //TODO: start algorithm to find empty spaces and move pieces around
   /*
   thinking space
