@@ -154,16 +154,19 @@ std::string Board::displayMoves(){
 
 void Board::printInformation(){
   //Print everything onto text files
-  std::ofstream outFile("information.txt");
-
-  if(outFile.is_open()){
-    outFile << displayBoard();
-    outFile << "----------------------------------------\n";
-    outFile << displaySpaces();
-    outFile << "----------------------------------------\n";
-    //TODO: ADD OTHER THINGS TO DISPLAY; MOVES, SOLUTIONS
+  std::ofstream boardFile("board.txt");
+  std::ofstream movesFile("moves.txt");
+  
+  if(boardFile.is_open() && movesFile.is_open()){
+    boardFile << displayBoard();
+    boardFile << "----------------------------------------\n";
+    boardFile << displaySpaces();
+    boardFile << "----------------------------------------\n";
     
-    outFile.close();
+	movesFile << displayMoves();
+	//TODO: ADD OTHER THINGS TO DISPLAY: SOLUTIONS    
+    boardFile.close();
+	movesFiles.close();
   }
   else{
     std::cout << "Error - Couldn't open file" << std::endl;
