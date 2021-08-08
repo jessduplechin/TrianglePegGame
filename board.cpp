@@ -65,14 +65,7 @@ int Board::checkAdjacent(){
   // THE resetBoard FUNCTION.
   //reset pegs
   std::cout << "jumping peg from pos 4 to pos 1" << std::endl;
-  std::vector<Peg*>::iterator i = pegs.begin() + 2;
-  std::vector<Space*>::iterator j = spaces.begin() + 3;
-  std::cout << "peg pos = " << (*i)->getPegPos() << std::endl;
-  (*i)->setPegPos(1);
-  (*i)->setAdjacentPegs((*j)->getAdjacentSpace());
-  i = pegs.begin();
-  pegs.erase(i);
-
+  updatePegs(pegs.begin(), pegs.begin() + 2, 1);
   //update spaces  
   updateSpaces(4, 2, 1);
 
@@ -215,7 +208,18 @@ void Board::updateSpaces(int origin, int between, int destination){
   }//for - end
 }
 
-
+void Board::updatePegs(Peg *remove, Peg *moved, int destination){
+  moved->setPegPos(destination);
+  pegs.erase(removed);
+  
+  for(std::vector<Space*>::iterator i = spaces.begin();
+      i != spaces.end(); i++){
+    if(moved->getPegPos() == (*i)->getPosition()){
+      moved->setAdjacentPegs((*i)->getAdjacentSpace());
+	  break;
+	}
+  }//for - end
+}
 
 
 

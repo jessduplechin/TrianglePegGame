@@ -30,6 +30,7 @@ class Board {
   void printInformation();
   void resetBoard();
   void updateSpaces(int origin, int between, int destination);
+  void updatePegs(Peg *remove, Peg *moved, int destination);
   
  private:
   int boardSize;
