@@ -18,6 +18,8 @@ class Move {
   Move(int origin = 0, int destination = 0);
   void setOrigin(int origin);
   void setDestination(int destination);
+  int getOrigin();
+  int getDestination();
 
  private:
   int origin;

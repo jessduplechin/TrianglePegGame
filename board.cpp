@@ -71,7 +71,7 @@ int Board::checkAdjacent(){
 
   //TODO: MOVE THIS SOMEWHERE ELSE. THIS IS TEMPORARY TO DEMO 
   // THE resetBoard FUNCTION.
-  std::cout << "jumping peg from pos 4 to pos 1" << std::endl;
+  /*std::cout << "jumping peg from pos 4 to pos 1" << std::endl;
   updateSpaces(4, 4, 1);
   updateSpaces(4, 1, 4);
   updateSpaces(1, 4, 4);
@@ -79,7 +79,11 @@ int Board::checkAdjacent(){
   //update spaces  
   updateSpaces(4, 2, 1);
   updateSpaces(9, 5, 2);
-
+*/
+  //add test moves to moves array
+	moves.push_back(new Move(3, 4));
+	moves.push_back(new Move(10, 2));
+	moves.push_back(new Move(7, 6));
   return 0;
 }
 
@@ -136,18 +140,33 @@ std::string Board::displaySpaces(){
   return output;
 }
 
+std::string Board::displayMoves(){
+  std::string output;
+  
+  for(std::vector<Move*>::iterator i = moves.begin(); 
+      i != moves.end(); i++){
+	  output.append(std::to_string((*i)->getOrigin()) + " -> " +
+	                std::to_string((*i)->getDestination()) + "\n");
+  }
+  
+  return output;
+}
+
 void Board::printInformation(){
   //Print everything onto text files
-  std::ofstream outFile("information.txt");
-
-  if(outFile.is_open()){
-    outFile << displayBoard();
-    outFile << "----------------------------------------\n";
-    outFile << displaySpaces();
-    outFile << "----------------------------------------\n";
-    //TODO: ADD OTHER THINGS TO DISPLAY; MOVES, SOLUTIONS
+  std::ofstream boardFile("board.txt");
+  std::ofstream movesFile("moves.txt");
+  
+  if(boardFile.is_open() && movesFile.is_open()){
+    boardFile << displayBoard();
+    boardFile << "----------------------------------------\n";
+    boardFile << displaySpaces();
+    boardFile << "----------------------------------------\n";
     
-    outFile.close();
+	movesFile << displayMoves();
+	//TODO: ADD OTHER THINGS TO DISPLAY: SOLUTIONS    
+    boardFile.close();
+	movesFile.close();
   }
   else{
     std::cout << "Error - Couldn't open file" << std::endl;

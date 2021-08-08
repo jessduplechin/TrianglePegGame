@@ -25,6 +25,7 @@ class Board {
   void recordMoves();
   std::string displayBoard();
   std::string displaySpaces();
+  std::string displayMoves();
   void printInformation();
   void resetBoard();
   void updateSpaces(int origin, int between, int destination);
