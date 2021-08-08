@@ -217,6 +217,7 @@ void Board::start(){
     Space *adjacentSpace;
     std::vector<int> validAdjacentPos;
     int position;
+	int randomIndex;
           
     destPos = emptySpaces.at(i);
     firstSpace = spaces[destPos];
@@ -233,11 +234,12 @@ void Board::start(){
     }
     
     //Skip if there are no valid, empty adjacent spaces
-    if(validAdjacentPos.size() > 0){
+    //if(validAdjacentPos.size() > 0){
+    while(validAdjacentPos.size() > 0){
       //Get an adjacent space chosen at random
-      betweenPos = validAdjacentPos.at(rand() % validAdjacentPos.size());
-      adjacentSpace = spaces[betweenPos];
-      //validAdjacentPos.clear();
+	  randomIndex = rand() % validAdjacentPos.size();
+      betweenPos = validAdjacentPos.at(randomIndex);
+      adjacentSpace = spaces[betweenPos];      
 
       std::cout << "betweenPos = " << betweenPos << std::endl;
 
@@ -254,17 +256,20 @@ void Board::start(){
           moves.push_back(new Move(origPos, destPos));
           std::cout << displayMoves() << std::endl;
           std::cout << displayBoard() << std::endl;
+		  break;
         }
         else{
           std::cout << "The origPos was empty. Skipping..." << std::endl;
+		  validAdjacentPos.erase(randomIndex);
         }
       }
       else{
         std::cout << "The origPos was invalid. Skipping..." << std::endl;
+		validAdjacentPos.erase(randomIndex);
       }
 
-    }//if(..size() > 0) - end
-
+	}//while - end
+    //}//if(..size() > 0) - end
   }//for - end
   
 }
