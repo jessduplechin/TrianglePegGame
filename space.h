@@ -15,16 +15,13 @@ class Space {
   bool getEmpty();
   void setEmpty(bool e);
   std::map<Position, int>& getAdjacentSpace();
-  int getPosition();
-  void setPosition(int position);
   void setAdjacentSpace(int boardSize, int totalSpaces);
   void removeSpace(Position pos);
   
  private:
   bool empty;
 
-  //cannot be changed once set
-  int position; 
+  //cannot be changed once set 
   std::map<Position, int> adjacentSpace;  
 };
 

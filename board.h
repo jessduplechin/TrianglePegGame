@@ -34,7 +34,8 @@ class Board {
   int startingSpace;
   int totalSpaces;  
   std::vector<Move*> moves;
-  std::vector<Space*> spaces;
+  //std::vector<Space*> spaces;
+  std::map<int, Space*> spaces;
   std::vector<std::vector<Move*>> solutions;
 };
 

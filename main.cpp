@@ -71,9 +71,9 @@ int main(int argc, char *argv[]){
   /*
   thinking space
   1) use for loop and go through all spaces 
-  2) if space has a peg, then check adjacent spaces for pegs. 
-  3) if adjacent space has a peg, then check its adjacent space for peg.
-  4) if no peg in adjacent space then jump original peg to final adjacent space. 
+  2) if space is not empty, then check adjacent spaces for emptiness. 
+  3) if adjacent space is not empty, then check its adjacent space for emptiness.
+  4) if adjacent space is empty, then jump original peg to final adjacent space. 
   5) repeat until no more moves can be done.
   6) Repeat until shortest path of all game sessions is found
   
