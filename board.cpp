@@ -192,9 +192,10 @@ void Board::updateSpaces(int origin, int between, int destination){
 
 Position Board::getSpaceCorrelation(int orig, int dest){
   for(int i = 0; i < 6; i++){
-	if(spaces[orig]->getAdjacentSpace()[i] == dest){
-		return static_cast<Position>(i);
-	}
+    if(spaces[orig]->getAdjacentSpace()
+       [static_cast<Position>(i)] == dest){
+      return static_cast<Position>(i);
+    }
   }
 }
 
@@ -231,7 +232,7 @@ void Board::start(){
       
     if(validAdjacentPos.size() > 0){
       //Get an adjacent space chosen at random
-	  position = rand() % validAdjacentPos.size()
+      position = rand() % validAdjacentPos.size();
       betweenPos = validAdjacentPos.at(position);
       adjacentSpace = spaces[betweenPos];
       //validAdjacentPos.clear();
@@ -241,7 +242,7 @@ void Board::start(){
       //TODO: FIX LOGIC. SECOND ADJ SPACE POSITION MUST BE SAME AS
       // ADJACENT'S POSITION TO DESTPOS
       //Get all valid secondary adjacent spaces that are not empty
-	  origPos = adjacentSpace->getAdjacentSpace()[static_cast<Position>(position)]
+      origPos = adjacentSpace->getAdjacentSpace()[static_cast<Position>(position)];
       std::cout << "origPos = " << origPos << std::endl;
 	  if(!spaces[origPos]->getEmpty()){
         updateSpaces(origPos, betweenPos, destPos);

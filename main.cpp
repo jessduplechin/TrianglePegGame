@@ -61,11 +61,9 @@ int main(int argc, char *argv[]){
   Board *board = new Board(startPegPos, boardSize);
   board->createBoard();
 
-  board->updateSpaces(4, 2, 1);
-  board->updateSpaces(9, 5, 2);
+  //  board->updateSpaces(4, 2, 1);
+  // board->updateSpaces(9, 5, 2);
 
-  std::cout << board->getSpaceCorrelation(4, 7) << std::endl;
-  
   //board->start();
   //board->printInformation();
   
