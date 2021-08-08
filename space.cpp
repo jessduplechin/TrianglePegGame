@@ -13,7 +13,8 @@
 
 Space::Space(bool empty, int position){
   this->empty = empty;  
-  
+  this->position = position;
+
   //initialize adjacent space to -1 meaning not set
   adjacentSpace[UL] = -1;
   adjacentSpace[UR] = -1;

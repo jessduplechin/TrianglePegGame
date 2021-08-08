@@ -22,6 +22,7 @@ class Space {
   bool empty;
 
   //cannot be changed once set 
+  int position;
   std::map<Position, int> adjacentSpace;  
 };
 
