@@ -118,8 +118,7 @@ std::string Board::displaySpaces(){
   //for(std::vector<Space*>::iterator i = spaces.begin();
     //  i != spaces.end(); i++){
   for(int i = 1; i <= this->totalSpaces; i++){
-    output.append("Space Position: " + std::to_string(spaces[i]->getPosition())
-                  + "\n");
+    output.append("Space Position: " + std::to_string(i) + "\n");
     output.append("Space Empty: " + std::to_string(spaces[i]->getEmpty()) + "\n");
     output.append("Space Adjacent UL: " +
                   std::to_string(spaces[i]->getAdjacentSpace()[UL]) + "\n");
@@ -162,7 +161,7 @@ void Board::resetBoard(){
   //for(std::vector<Space*>::iterator i = spaces.begin();
       //i != spaces.end(); i++){
   for(int i = 1; i <= this->totalSpaces; i++){ 
-    if(spaces[i]->getPosition() != this->startingSpace){
+    if(i != this->startingSpace){
       spaces[i]->setEmpty(false);
     }
     else{
