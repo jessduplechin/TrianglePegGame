@@ -58,13 +58,14 @@ int main(int argc, char *argv[]){
   Board *board = new Board(startPegPos, boardSize);
   board->createBoard();
   
-  std::cout << board->displayBoard() << std::endl;
-  board->checkAdjacent();
-  std::cout << board->displayBoard() << std::endl;
-  board->printInformation();
-  board->resetBoard();
-  std::cout << board->displayBoard() << std::endl;
-
+  /*for(std::vector<Space*>::iterator i = spaces.begin();
+      i != spaces.end(); i++){
+    if((*i)->getEmpty()){
+      std::cout << (*i)->getAdjacentSpace()[rand() % 6] << std::endl;
+    }
+  }//for - end
+*/
+  std::cout << (*i)->getAdjacentSpace()[rand() % 6] << std::endl;
 
   //TODO: start algorithm to find empty spaces and move pieces around
   /*
