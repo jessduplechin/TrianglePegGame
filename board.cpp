@@ -74,8 +74,7 @@ std::vector<int> Board::findSpaces(){
 
 int Board::checkAdjacent(){
 
-  //TODO: FILL IN
-  
+  //TODO: FILL IN 
   
   return 0;
 }
@@ -198,9 +197,7 @@ void Board::start(){
   int destPos;
   bool possibleMoves;
   std::vector<int> emptySpaces;
-  
-  checkAdjacent();  //TODO: REMOVE FOR DEBUGGING ONLY
-  
+    
   emptySpaces = findSpaces();
   
   for(int i = 0; i < emptySpaces.size(); i++){
@@ -208,6 +205,7 @@ void Board::start(){
     Space *adjacentSpace;
     Space *secondAdjSpace;
     std::vector<int> validAdjacentPos;
+	int position;
           
     destPos = emptySpaces.at(i);
     firstSpace = spaces[destPos];
@@ -225,14 +223,27 @@ void Board::start(){
       
     if(validAdjacentPos.size() > 0){
       //Get an adjacent space chosen at random
-      betweenPos = validAdjacentPos.at(rand() % validAdjacentPos.size());
+	  position = rand() % validAdjacentPos.size()
+      betweenPos = validAdjacentPos.at(position);
       adjacentSpace = spaces[betweenPos];
-      validAdjacentPos.clear();
+      //validAdjacentPos.clear();
+
+      std::cout << "betweenPos = " << betweenPos << std::endl;
 
       //TODO: FIX LOGIC. SECOND ADJ SPACE POSITION MUST BE SAME AS
       // ADJACENT'S POSITION TO DESTPOS
       //Get all valid secondary adjacent spaces that are not empty
-      for(int j = 0; j < 6; j++){
+	  origPos = adjacentSpace->getAdjacentSpace()[static_cast<Position>(position)]
+      std::cout << "origPos = " << origPos << std::endl;
+	  if(!spaces[origPos]->getEmpty()){
+        updateSpaces(origPos, betweenPos, destPos);
+        moves.push_back(new Move(origPos, destPos));
+        std::cout << displayMoves() << std::endl;
+        std::cout << displayBoard() << std::endl;
+      }
+	  //TODO: else we try again with the other betweenPos
+
+	/*for(int j = 0; j < 6; j++){
         if(adjacentSpace->getAdjacentSpace()[static_cast<Position>(j)] != 0 &&
            !spaces[adjacentSpace->getAdjacentSpace()[static_cast<Position>(j)]
                    ]->getEmpty()){
@@ -255,6 +266,7 @@ void Board::start(){
         std::cout << displayBoard() << std::endl;
           
       } 
+	  */
     }//if(..size() > 0) - end
       
           
