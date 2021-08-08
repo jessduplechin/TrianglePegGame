@@ -7,7 +7,7 @@
 #define SPACE_H
 
 #include <map>
-#include "class.h"
+#include "move.h"
 
 class Space {
  public:

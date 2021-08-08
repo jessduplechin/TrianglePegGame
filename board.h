@@ -9,10 +9,10 @@
 */
 
 #ifndef BOARD_H
-#define BOARD_h
+#define BOARD_H
 
 #include <vector>
-#include "class.h"
+#include "move.h"
 #include "space.h"
 #include <string>
 
