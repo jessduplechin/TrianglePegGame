@@ -65,7 +65,10 @@ int Board::checkAdjacent(){
   // THE resetBoard FUNCTION.
   //reset pegs
   std::cout << "jumping peg from pos 4 to pos 1" << std::endl;
-  updatePegs(pegs.begin(), pegs.begin() + 2, 1);
+  updatePegs(4, 2, 2);
+  updateSpaces(4, 4, 1);
+  
+  updatePegs(4, 2, 1);
   //update spaces  
   updateSpaces(4, 2, 1);
 
@@ -196,28 +199,48 @@ void Board::resetBoard(){
 }
 
 void Board::updateSpaces(int origin, int between, int destination){
-  for(std::vector<Space*>::iterator i = spaces.begin();
-      i != spaces.end(); i++){
-	if((*i)->getPosition() == origin ||
-	   (*i)->getPosition() == between){
-      (*i)->setEmpty(true);
-	}
-	else if((*i)->getPosition() == destination){
-	  (*i)->setEmpty(false);
-	}
-  }//for - end
-}
-
-void Board::updatePegs(Peg *remove, Peg *moved, int destination){
-  moved->setPegPos(destination);
-  pegs.erase(removed);
+  if(origin == between || origin == destination || between == destination){
+    std::cout << "Error - origin, between, or destination are same values" << std::endl;
+    return;
+  }
   
   for(std::vector<Space*>::iterator i = spaces.begin();
       i != spaces.end(); i++){
-    if(moved->getPegPos() == (*i)->getPosition()){
-      moved->setAdjacentPegs((*i)->getAdjacentSpace());
-	  break;
-	}
+        if((*i)->getPosition() == origin ||
+           (*i)->getPosition() == between){
+      (*i)->setEmpty(true);
+        }
+        else if((*i)->getPosition() == destination){
+          (*i)->setEmpty(false);
+        }
+  }//for - end
+}
+
+void Board::updatePegs(int origin, int between, int destination){
+  std::vector<Peg*>::iterator temp;
+
+  if(origin == between || origin == destination || between == destination){
+    std::cout << "Error - origin, between, or destination are same values" << std::endl;
+    return;
+  }
+  
+  for(std::vector<Peg*>::iterator i = pegs.begin();
+      i != pegs.end(); i++){
+    if((*i)->getPegPos() == origin){
+      (*i)->setPegPos(destination);
+      temp = i;
+    }
+    else if((*i)->getPegPos() == between){
+      pegs.erase(i);
+    }
+  }//for - end
+  
+  for(std::vector<Space*>::iterator i = spaces.begin();
+      i != spaces.end(); i++){
+    if((*temp)->getPegPos() == (*i)->getPosition()){
+      (*temp)->setAdjacentPegs((*i)->getAdjacentSpace());
+      break;
+    }
   }//for - end
 }
 
