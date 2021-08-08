@@ -31,17 +31,17 @@ int main(int argc, char *argv[]){
     {
       int totalSpaces = 0;
       for(int i = 1; i <= std::stoi(argv[1]); i++){
-	totalSpaces += i;
+        totalSpaces += i;
       }
       if(checkArguments(argv[1]) && 
-	 checkArguments(argv[2]) && 
-	 std::stoi(argv[2]) <= totalSpaces){
-	boardSize = std::stoi(argv[1]);
-	startPegPos = std::stoi(argv[2]);
+         checkArguments(argv[2]) && 
+         std::stoi(argv[2]) <= totalSpaces){
+        boardSize = std::stoi(argv[1]);
+        startPegPos = std::stoi(argv[2]);
       }
       else{
-	std::cout << "Error - Starting position exceeds size of board" << std::endl;
-	return -1;
+        std::cout << "Error - Starting position exceeds size of board" << std::endl;
+        return -1;
       }
     }
     break;
