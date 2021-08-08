@@ -221,7 +221,7 @@ void Board::start(){
     destPos = emptySpaces.at(i);
     firstSpace = spaces[destPos];
     std::cout << "destPos = " << destPos << std::endl;
-	
+        
     //Get all valid adjacent spaces that are not empty
     for(int j = 0; j < 6; j++){       
       if(firstSpace->getAdjacentSpace()[static_cast<Position>(j)] != 0 &&
@@ -249,19 +249,19 @@ void Board::start(){
       std::cout << "origPos = " << origPos << std::endl;
       std::cout << "position = " << position << std::endl;
       if(origPos != 0){
-	    if(!spaces[origPos]->getEmpty()){
-	      updateSpaces(origPos, betweenPos, destPos);
-	      moves.push_back(new Move(origPos, destPos));
-	      std::cout << displayMoves() << std::endl;
-	      std::cout << displayBoard() << std::endl;
-	    }
-	    else{
-	      std::cout << "The origPos was empty. Skipping..." << std::endl;
-	    }
-	  }
-	  else{
-	    std::cout << "The origPos was invalid. Skipping..." << std::endl;
-	  }
+        if(!spaces[origPos]->getEmpty()){
+          updateSpaces(origPos, betweenPos, destPos);
+          moves.push_back(new Move(origPos, destPos));
+          std::cout << displayMoves() << std::endl;
+          std::cout << displayBoard() << std::endl;
+        }
+        else{
+          std::cout << "The origPos was empty. Skipping..." << std::endl;
+        }
+      }
+      else{
+        std::cout << "The origPos was invalid. Skipping..." << std::endl;
+      }
 
     }//if(..size() > 0) - end
 
