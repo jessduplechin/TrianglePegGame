@@ -146,7 +146,7 @@ std::string Board::displayMoves(){
   for(std::vector<Move*>::iterator i = moves.begin(); 
       i != moves.end(); i++){
 	  output.append(std::to_string((*i)->getOrigin()) + " -> " +
-	                std::to_string((*i)->getDestination() + "\n"));
+	                std::to_string((*i)->getDestination()) + "\n");
   }
   
   return output;
