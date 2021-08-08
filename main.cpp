@@ -65,7 +65,7 @@ int main(int argc, char *argv[]){
     }
   }//for - end
 */
-  std::cout << (*i)->getAdjacentSpace()[rand() % 6] << std::endl;
+  //std::cout << (*i)->getAdjacentSpace()[rand() % 6] << std::endl;
 
   //TODO: start algorithm to find empty spaces and move pieces around
   /*
