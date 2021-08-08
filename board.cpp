@@ -74,11 +74,9 @@ std::vector<int> Board::findSpaces(){
 
 int Board::checkAdjacent(){
 
-  //TODO: MOVE THIS SOMEWHERE ELSE. THIS IS TEMPORARY TO DEMO 
-  // THE resetBoard FUNCTION.
-  updateSpaces(4, 2, 1);
-  updateSpaces(9, 5, 2);
-
+  //TODO: FILL IN
+  
+  
   return 0;
 }
 
