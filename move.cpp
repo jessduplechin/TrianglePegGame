@@ -4,7 +4,7 @@
   Description: This file implements Move class for the game.
  */
 
-#include "class.h"
+#include "move.h"
 
 Move::Move(int origin, int destination){
   this->origin = origin;

@@ -18,35 +18,38 @@ int main(int argc, char *argv[]){
   int startPegPos = 1;
   
   //Checking arguments for validity
-  if(argc == 2){
+  switch(argc){
+  case 2:
     if(checkArguments(argv[1])){
       boardSize = std::stoi(argv[1]);
     }
     else{
       return -1;
     }
-  }
-  else if(argc == 3){
-    int totalSpaces = 0;
-    for(int i = 1; i <= std::stoi(argv[1]); i++){
-      totalSpaces += i;
+    break;
+  case 3:
+    {
+      int totalSpaces = 0;
+      for(int i = 1; i <= std::stoi(argv[1]); i++){
+	totalSpaces += i;
+      }
+      if(checkArguments(argv[1]) && 
+	 checkArguments(argv[2]) && 
+	 std::stoi(argv[2]) <= totalSpaces){
+	boardSize = std::stoi(argv[1]);
+	startPegPos = std::stoi(argv[2]);
+      }
+      else{
+	std::cout << "Error - Starting position exceeds size of board" << std::endl;
+	return -1;
+      }
     }
-    if(checkArguments(argv[1]) && 
-       checkArguments(argv[2]) && 
-       std::stoi(argv[2]) <= totalSpaces){
-      boardSize = std::stoi(argv[1]);
-      startPegPos = std::stoi(argv[2]);
-    }
-    else{
-      std::cout << "Error - Starting position exceeds size of board" << std::endl;
-      return -1;
-    }
-  }
-  else if(argc > 3){
+    break;
+  default:
     std::cout << "Error - Too many arguments" << std::endl;
     return -1;
   }
-
+  
   //Creation
   std::cout << "Board size = " << boardSize << std::endl;
   std::cout << "Starting peg position = " << startPegPos << std::endl;
@@ -76,7 +79,7 @@ int main(int argc, char *argv[]){
   Issues: how to check which adjacent space first? Otherwise it'll take the first adjacent space it sees
           which will always be the same for every new run which will create the same singular result. 
                   
-  Possible resolutions: Use random number generator to            
+  Possible resolutions: Use random number generator to change which adjacent space to check          
   */
   
   std::cout << "Exiting..." << std::endl;

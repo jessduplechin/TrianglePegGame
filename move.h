@@ -5,10 +5,8 @@
                for the game.
  */
 
-#ifndef CLASS_H
-#define CLASS_H
-
-#include <map>
+#ifndef MOVE_H
+#define MOVE_H
 
 //These defines the adjacent positions to the peg/space
 //U is for upper, L is for lower
