@@ -191,12 +191,15 @@ void Board::updateSpaces(int origin, int between, int destination){
 }
 
 Position Board::getSpaceCorrelation(int orig, int dest){
+  Position correlation;
   for(int i = 0; i < 6; i++){
     if(spaces[orig]->getAdjacentSpace()
        [static_cast<Position>(i)] == dest){
-      return static_cast<Position>(i);
+      correlation = static_cast<Position>(i);
+      break;
     }
   }
+  return correlation;
 }
 
 void Board::start(){
@@ -212,9 +215,8 @@ void Board::start(){
   for(int i = 0; i < emptySpaces.size(); i++){
     Space *firstSpace;
     Space *adjacentSpace;
-    Space *secondAdjSpace;
     std::vector<int> validAdjacentPos;
-	int position;
+    int position;
           
     destPos = emptySpaces.at(i);
     firstSpace = spaces[destPos];
@@ -229,27 +231,37 @@ void Board::start(){
       }
     }
     std::cout << "destPos = " << destPos << std::endl;
-      
+
+    //Skip if there are no valid, empty adjacent spaces
     if(validAdjacentPos.size() > 0){
       //Get an adjacent space chosen at random
-      position = rand() % validAdjacentPos.size();
-      betweenPos = validAdjacentPos.at(position);
+      betweenPos = validAdjacentPos.at(rand() % validAdjacentPos.size());
       adjacentSpace = spaces[betweenPos];
       //validAdjacentPos.clear();
 
       std::cout << "betweenPos = " << betweenPos << std::endl;
 
-      //TODO: FIX LOGIC. SECOND ADJ SPACE POSITION MUST BE SAME AS
-      // ADJACENT'S POSITION TO DESTPOS
-      //Get all valid secondary adjacent spaces that are not empty
+      position = getSpaceCorrelation(destPos, betweenPos);
+
+      //Get valid secondary adjacent space using same position
+      //as first adjacent space
       origPos = adjacentSpace->getAdjacentSpace()[static_cast<Position>(position)];
-      std::cout << "origPos = " << origPos << std::endl;
+        std::cout << "origPos = " << origPos << std::endl;
+	std::cout << "position = " << position << std::endl;
+	if(origPos != 0){
 	  if(!spaces[origPos]->getEmpty()){
-        updateSpaces(origPos, betweenPos, destPos);
-        moves.push_back(new Move(origPos, destPos));
-        std::cout << displayMoves() << std::endl;
-        std::cout << displayBoard() << std::endl;
-      }
+	    updateSpaces(origPos, betweenPos, destPos);
+	    moves.push_back(new Move(origPos, destPos));
+	    std::cout << displayMoves() << std::endl;
+	    std::cout << displayBoard() << std::endl;
+	  }
+	  else{
+	    std::cout << "The origPos was empty. Skipping..." << std::endl;
+	  }
+	}
+	else{
+	  std::cout << "The origPos was invalid. Skipping..." << std::endl;
+	}
 	  //TODO: else we try again with the other betweenPos
 
 	/*for(int j = 0; j < 6; j++){
