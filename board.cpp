@@ -166,7 +166,7 @@ void Board::printInformation(){
 	movesFile << displayMoves();
 	//TODO: ADD OTHER THINGS TO DISPLAY: SOLUTIONS    
     boardFile.close();
-	movesFiles.close();
+	movesFile.close();
   }
   else{
     std::cout << "Error - Couldn't open file" << std::endl;
