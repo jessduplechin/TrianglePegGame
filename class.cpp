@@ -1,30 +1,10 @@
 /*
   Name: Jessica Duplechin
   Date: 05/08/2021
-  Description: This file implements Peg and Move class for the game.
+  Description: This file implements Move class for the game.
  */
 
 #include "class.h"
-
-Peg::Peg(int position){
-  this->position = position;
-}
-
-int Peg::getPegPos(){
-  return position;
-}
-
-void Peg::setPegPos(int position){
-  this->position = position;
-}
-
-std::map<Position, int>& Peg::getAdjacentPegs(){
-  return adjacentPegs;
-}
-
-void Peg::setAdjacentPegs(std::map<Position, int>& pegs){
-  adjacentPegs = pegs;
-}
 
 Move::Move(int origin, int destination){
   this->origin = origin;

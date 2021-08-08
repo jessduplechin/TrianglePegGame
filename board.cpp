@@ -30,7 +30,14 @@ void Board::createBoard(){
   
   //Create all the spaces for the board
   for(int i = 1; i <= this->totalSpaces; i++){
-    Space *space = new Space(true, i);
+    Space *space;
+    if(i != this->startingSpace){
+      space = new Space(false, i);
+    }
+    else{
+      space = new Space(true, i);
+    }
+    
     if(leftSide == i){
       leftSide += leftIncrement;
       leftIncrement++;
@@ -63,29 +70,16 @@ int Board::checkAdjacent(){
 
   //TODO: MOVE THIS SOMEWHERE ELSE. THIS IS TEMPORARY TO DEMO 
   // THE resetBoard FUNCTION.
-  //reset pegs
   std::cout << "jumping peg from pos 4 to pos 1" << std::endl;
-  updatePegs(4, 2, 2);
   updateSpaces(4, 4, 1);
-  
-  updatePegs(4, 2, 1);
+  updateSpaces(4, 1, 4);
+  updateSpaces(1, 4, 4);
+  updateSpaces(4, 4, 4);
   //update spaces  
   updateSpaces(4, 2, 1);
+  updateSpaces(9, 5, 2);
 
   return 0;
-}
-
-void Board::createPegs(){
-  for(std::vector<Space*>::iterator i = spaces.begin();
-      i != spaces.end(); i++){
-    if(((*i)->getEmpty()) && ((*i)->getPosition() != this->startingSpace)){
-      Peg *peg = new Peg((*i)->getPosition());
-      peg->setAdjacentPegs((*i)->getAdjacentSpace());
-      pegs.push_back(peg);
-      //set space as not empty now
-      (*i)->setEmpty(false);
-    }
-  }//for - end
 }
 
 void Board::recordMoves(){
@@ -143,30 +137,6 @@ std::string Board::displaySpaces(){
   return output;
 }
 
-std::string Board::displayPegs(){
-  std::string output;
-  for(std::vector<Peg*>::iterator i = pegs.begin();
-      i != pegs.end(); i++){
-    output.append("Peg Position: " + std::to_string((*i)->getPegPos())
-                  + "\n");
-    output.append("Peg Adjacent UL: " +
-                  std::to_string((*i)->getAdjacentPegs()[UL]) + "\n");
-    output.append("Peg Adjacent UR: " +
-                  std::to_string((*i)->getAdjacentPegs()[UR]) + "\n");
-    output.append("Peg Adjacent L: " +
-                  std::to_string((*i)->getAdjacentPegs()[L]) + "\n");
-    output.append("Peg Adjacent R: " +
-                  std::to_string((*i)->getAdjacentPegs()[R]) + "\n");
-    output.append("Peg Adjacent LL: " +
-                  std::to_string((*i)->getAdjacentPegs()[LL]) + "\n");
-    output.append("Peg Adjacent LR: " +
-                  std::to_string((*i)->getAdjacentPegs()[LR]) + "\n");
-    output.append("\n");
-  }//for - end
-  
-  return output;
-}
-
 void Board::printInformation(){
   //Print everything onto text files
   std::ofstream outFile("information.txt");
@@ -176,7 +146,6 @@ void Board::printInformation(){
     outFile << "----------------------------------------\n";
     outFile << displaySpaces();
     outFile << "----------------------------------------\n";
-    outFile << displayPegs();
     //TODO: ADD OTHER THINGS TO DISPLAY; MOVES, SOLUTIONS
     
     outFile.close();
@@ -190,12 +159,13 @@ void Board::resetBoard(){
   //reset spaces vector to original state
   for(std::vector<Space*>::iterator i = spaces.begin();
       i != spaces.end(); i++){
-    (*i)->setEmpty(true);
+    if((*i)->getPosition() != this->startingSpace){
+      (*i)->setEmpty(false);
+    }
+    else{
+      (*i)->setEmpty(true);
+    }
   }//for - end
-  
-  //Remove all pegs and create new ones
-  pegs.clear();
-  createPegs();
 }
 
 void Board::updateSpaces(int origin, int between, int destination){
@@ -215,36 +185,4 @@ void Board::updateSpaces(int origin, int between, int destination){
         }
   }//for - end
 }
-
-void Board::updatePegs(int origin, int between, int destination){
-  std::vector<Peg*>::iterator temp;
-
-  if(origin == between || origin == destination || between == destination){
-    std::cout << "Error - origin, between, or destination are same values" << std::endl;
-    return;
-  }
-  
-  for(std::vector<Peg*>::iterator i = pegs.begin();
-      i != pegs.end(); i++){
-    if((*i)->getPegPos() == origin){
-      (*i)->setPegPos(destination);
-      temp = i;
-    }
-    else if((*i)->getPegPos() == between){
-      pegs.erase(i);
-    }
-  }//for - end
-  
-  for(std::vector<Space*>::iterator i = spaces.begin();
-      i != spaces.end(); i++){
-    if((*temp)->getPegPos() == (*i)->getPosition()){
-      (*temp)->setAdjacentPegs((*i)->getAdjacentSpace());
-      break;
-    }
-  }//for - end
-}
-
-
-
-
 
