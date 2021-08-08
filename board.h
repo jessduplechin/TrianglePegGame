@@ -22,22 +22,18 @@ class Board {
   void createBoard();
   int findSpaces();
   int checkAdjacent();
-  void createPegs();
   void recordMoves();
   std::string displayBoard();
   std::string displaySpaces();
-  std::string displayPegs();
   void printInformation();
   void resetBoard();
   void updateSpaces(int origin, int between, int destination);
-  void updatePegs(int origin, int between, int destination);
   
  private:
   int boardSize;
   int startingSpace;
   int totalSpaces;  
   std::vector<Move*> moves;
-  std::vector<Peg*> pegs;
   std::vector<Space*> spaces;
   std::vector<std::vector<Move*>> solutions;
 };

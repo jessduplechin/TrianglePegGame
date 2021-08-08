@@ -26,17 +26,4 @@ class Move {
   int destination;
 };
 
-class Peg {
- public:
-  Peg(int position = 1); 
-  int getPegPos();
-  void setPegPos(int position);
-  std::map<Position, int>& getAdjacentPegs();
-  void setAdjacentPegs(std::map<Position, int>& pegs);
-  
- private:
-  int position;
-  std::map<Position, int> adjacentPegs;
-};
-
 #endif

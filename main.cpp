@@ -55,16 +55,14 @@ int main(int argc, char *argv[]){
   Board *board = new Board(startPegPos, boardSize);
   board->createBoard();
   
-  std::cout << "Creating pegs..." << std::endl;
-  board->createPegs();
-
-  //board->printInformation();
   std::cout << board->displayBoard() << std::endl;
   board->checkAdjacent();
   std::cout << board->displayBoard() << std::endl;
+  board->printInformation();
   board->resetBoard();
   std::cout << board->displayBoard() << std::endl;
-  
+
+
   //TODO: start algorithm to find empty spaces and move pieces around
   /*
   thinking space
@@ -77,8 +75,8 @@ int main(int argc, char *argv[]){
   
   Issues: how to check which adjacent space first? Otherwise it'll take the first adjacent space it sees
           which will always be the same for every new run which will create the same singular result. 
-		  
-  Possible resolutions: Use random number generator to 		  
+                  
+  Possible resolutions: Use random number generator to            
   */
   
   std::cout << "Exiting..." << std::endl;
