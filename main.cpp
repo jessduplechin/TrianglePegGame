@@ -46,8 +46,11 @@ int main(int argc, char *argv[]){
     }
     break;
   default:
-    std::cout << "Error - Too many arguments" << std::endl;
-    return -1;
+    if(argc > 3){
+      std::cout << "Error - Too many arguments" << std::endl;
+      return -1;
+    }
+    break;
   }
   
   //Creation
@@ -57,16 +60,8 @@ int main(int argc, char *argv[]){
   
   Board *board = new Board(startPegPos, boardSize);
   board->createBoard();
+  //  board->start();
   
-  /*for(std::vector<Space*>::iterator i = spaces.begin();
-      i != spaces.end(); i++){
-    if((*i)->getEmpty()){
-      std::cout << (*i)->getAdjacentSpace()[rand() % 6] << std::endl;
-    }
-  }//for - end
-*/
-  std::cout << (*i)->getAdjacentSpace()[rand() % 6] << std::endl;
-
   //TODO: start algorithm to find empty spaces and move pieces around
   /*
   thinking space
