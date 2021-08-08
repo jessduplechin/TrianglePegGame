@@ -20,32 +20,34 @@ int main(int argc, char *argv[]){
   //Checking arguments for validity
   switch(argc){
   case 2:
-	if(checkArguments(argv[1])){
+    if(checkArguments(argv[1])){
       boardSize = std::stoi(argv[1]);
     }
     else{
       return -1;
     }
-	break;
+    break;
   case 3:
-    int totalSpaces = 0;
-    for(int i = 1; i <= std::stoi(argv[1]); i++){
-      totalSpaces += i;
+    {
+      int totalSpaces = 0;
+      for(int i = 1; i <= std::stoi(argv[1]); i++){
+	totalSpaces += i;
+      }
+      if(checkArguments(argv[1]) && 
+	 checkArguments(argv[2]) && 
+	 std::stoi(argv[2]) <= totalSpaces){
+	boardSize = std::stoi(argv[1]);
+	startPegPos = std::stoi(argv[2]);
+      }
+      else{
+	std::cout << "Error - Starting position exceeds size of board" << std::endl;
+	return -1;
+      }
     }
-    if(checkArguments(argv[1]) && 
-       checkArguments(argv[2]) && 
-       std::stoi(argv[2]) <= totalSpaces){
-      boardSize = std::stoi(argv[1]);
-      startPegPos = std::stoi(argv[2]);
-    }
-    else{
-      std::cout << "Error - Starting position exceeds size of board" << std::endl;
-      return -1;
-    }
-	break;
+    break;
   default:
     std::cout << "Error - Too many arguments" << std::endl;
-	break;
+    break;
   }
   
   //Creation
