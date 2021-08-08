@@ -20,7 +20,7 @@ class Board {
  public:
   Board(int startingSpace = 1, int boardSize = 3);
   void createBoard();
-  std::vector<Space*>& findSpaces();
+  std::vector<int> findSpaces();
   int checkAdjacent();
   void recordMoves();
   std::string displayBoard();
