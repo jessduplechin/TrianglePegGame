@@ -190,6 +190,14 @@ void Board::updateSpaces(int origin, int between, int destination){
   spaces[destination]->setEmpty(false);
 }
 
+Position Board::getSpaceCorrelation(int orig, int dest){
+  for(int i = 0; i < 6; i++){
+	if(spaces[orig]->getAdjacentSpace()[i] == dest){
+		return static_cast<Position>(i);
+	}
+  }
+}
+
 void Board::start(){
   srand(time(0));
   int origPos;

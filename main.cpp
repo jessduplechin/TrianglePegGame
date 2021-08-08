@@ -64,8 +64,10 @@ int main(int argc, char *argv[]){
   board->updateSpaces(4, 2, 1);
   board->updateSpaces(9, 5, 2);
 
-  board->start();
-  board->printInformation();
+  std::cout << board->getSpaceCorrelation(4, 7) << std::endl;
+  
+  //board->start();
+  //board->printInformation();
   
   //TODO: start algorithm to find empty spaces and move pieces around
   /*
