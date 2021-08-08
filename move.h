@@ -1,7 +1,7 @@
 /*
   Name: Jessica Duplechin
   Date: 05/08/2021
-  Description: This file defines all the classes and enums necessary 
+  Description: This file declares the Move class and enums necessary 
                for the game.
  */
 

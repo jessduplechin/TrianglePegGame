@@ -57,7 +57,8 @@ void Board::createBoard(){
       space->removeSpace(LR);
     }
     space->setAdjacentSpace(this->boardSize, this->totalSpaces);
-    spaces.push_back(space);
+    //spaces.push_back(space);
+    spaces[i] = space;
   }//for - end
 }
 
@@ -97,13 +98,13 @@ std::string Board::displayBoard(){
       output.append("   ");
     }
     //Show peg placement using spaces vector
-    for(int j = 0; j < i; j++){
-      if(!spaces.at(k)->getEmpty()){
+    for(int j = 0; j < i; j++){   
+      if(!spaces[k + 1]->getEmpty()){
         output.append("[*]   ");
       }
       else{
         output.append("[ ]   ");
-      }
+        }
       k++;
     }
     output.append("\n");
@@ -114,23 +115,21 @@ std::string Board::displayBoard(){
 
 std::string Board::displaySpaces(){
   std::string output;
-  for(std::vector<Space*>::iterator i = spaces.begin();
-      i != spaces.end(); i++){
-    output.append("Space Position: " + std::to_string((*i)->getPosition())
-                  + "\n");
-    output.append("Space Empty: " + std::to_string((*i)->getEmpty()) + "\n");
+  for(int i = 1; i <= this->totalSpaces; i++){
+    output.append("Space Position: " + std::to_string(i) + "\n");
+    output.append("Space Empty: " + std::to_string(spaces[i]->getEmpty()) + "\n");
     output.append("Space Adjacent UL: " +
-                  std::to_string((*i)->getAdjacentSpace()[UL]) + "\n");
+                  std::to_string(spaces[i]->getAdjacentSpace()[UL]) + "\n");
     output.append("Space Adjacent UR: " +
-                  std::to_string((*i)->getAdjacentSpace()[UR]) + "\n");
+                  std::to_string(spaces[i]->getAdjacentSpace()[UR]) + "\n");
     output.append("Space Adjacent L: " +
-                  std::to_string((*i)->getAdjacentSpace()[L]) + "\n");
+                  std::to_string(spaces[i]->getAdjacentSpace()[L]) + "\n");
     output.append("Space Adjacent R: " +
-                  std::to_string((*i)->getAdjacentSpace()[R]) + "\n");
+                  std::to_string(spaces[i]->getAdjacentSpace()[R]) + "\n");
     output.append("Space Adjacent LL: " +
-                  std::to_string((*i)->getAdjacentSpace()[LL]) + "\n");
+                  std::to_string(spaces[i]->getAdjacentSpace()[LL]) + "\n");
     output.append("Space Adjacent LR: " +
-                  std::to_string((*i)->getAdjacentSpace()[LR]) + "\n");
+                  std::to_string(spaces[i]->getAdjacentSpace()[LR]) + "\n");
     output.append("\n");
   }//for - end
     
@@ -157,13 +156,12 @@ void Board::printInformation(){
 
 void Board::resetBoard(){
   //reset spaces vector to original state
-  for(std::vector<Space*>::iterator i = spaces.begin();
-      i != spaces.end(); i++){
-    if((*i)->getPosition() != this->startingSpace){
-      (*i)->setEmpty(false);
+  for(int i = 1; i <= this->totalSpaces; i++){ 
+    if(i != this->startingSpace){
+      spaces[i]->setEmpty(false);
     }
     else{
-      (*i)->setEmpty(true);
+      spaces[i]->setEmpty(true);
     }
   }//for - end
 }
@@ -174,15 +172,8 @@ void Board::updateSpaces(int origin, int between, int destination){
     return;
   }
   
-  for(std::vector<Space*>::iterator i = spaces.begin();
-      i != spaces.end(); i++){
-        if((*i)->getPosition() == origin ||
-           (*i)->getPosition() == between){
-      (*i)->setEmpty(true);
-        }
-        else if((*i)->getPosition() == destination){
-          (*i)->setEmpty(false);
-        }
-  }//for - end
+  spaces[origin]->setEmpty(true);
+  spaces[between]->setEmpty(true);
+  spaces[destination]->setEmpty(false);
 }
 

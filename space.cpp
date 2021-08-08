@@ -12,9 +12,9 @@
 #include <iostream>
 
 Space::Space(bool empty, int position){
-  this->empty = empty;
+  this->empty = empty;  
   this->position = position;
-  
+
   //initialize adjacent space to -1 meaning not set
   adjacentSpace[UL] = -1;
   adjacentSpace[UR] = -1;
@@ -34,18 +34,6 @@ void Space::setEmpty(bool e){
 
 std::map<Position, int>& Space::getAdjacentSpace(){
   return adjacentSpace;
-}
-
-int Space::getPosition(){
-  return this->position;
-}
-
-void Space::setPosition(int position){
-  //-1 means that it hasn't been set
-  //Only update if position hasn't been set
-  if(this->position == -1){
-    this->position = position;
-  }
 }
 
 void Space::setAdjacentSpace(int boardSize, int totalSpaces){

@@ -31,23 +31,26 @@ int main(int argc, char *argv[]){
     {
       int totalSpaces = 0;
       for(int i = 1; i <= std::stoi(argv[1]); i++){
-	totalSpaces += i;
+        totalSpaces += i;
       }
       if(checkArguments(argv[1]) && 
-	 checkArguments(argv[2]) && 
-	 std::stoi(argv[2]) <= totalSpaces){
-	boardSize = std::stoi(argv[1]);
-	startPegPos = std::stoi(argv[2]);
+         checkArguments(argv[2]) && 
+         std::stoi(argv[2]) <= totalSpaces){
+        boardSize = std::stoi(argv[1]);
+        startPegPos = std::stoi(argv[2]);
       }
       else{
-	std::cout << "Error - Starting position exceeds size of board" << std::endl;
-	return -1;
+        std::cout << "Error - Starting position exceeds size of board" << std::endl;
+        return -1;
       }
     }
     break;
   default:
-    std::cout << "Error - Too many arguments" << std::endl;
-    return -1;
+    if(argc > 3){
+      std::cout << "Error - Too many arguments" << std::endl;
+      return -1;
+    }
+    break;
   }
   
   //Creation
@@ -57,22 +60,22 @@ int main(int argc, char *argv[]){
   
   Board *board = new Board(startPegPos, boardSize);
   board->createBoard();
-  
-  std::cout << board->displayBoard() << std::endl;
+  //  board->start();
+
+  board->printInformation();
   board->checkAdjacent();
   std::cout << board->displayBoard() << std::endl;
-  board->printInformation();
-  board->resetBoard();
-  std::cout << board->displayBoard() << std::endl;
+  std::cout << board->displaySpaces() << std::endl;
 
-
+  
+  
   //TODO: start algorithm to find empty spaces and move pieces around
   /*
   thinking space
   1) use for loop and go through all spaces 
-  2) if space has a peg, then check adjacent spaces for pegs. 
-  3) if adjacent space has a peg, then check its adjacent space for peg.
-  4) if no peg in adjacent space then jump original peg to final adjacent space. 
+  2) if space is not empty, then check adjacent spaces for emptiness. 
+  3) if adjacent space is not empty, then check its adjacent space for emptiness.
+  4) if adjacent space is empty, then jump original peg to final adjacent space. 
   5) repeat until no more moves can be done.
   6) Repeat until shortest path of all game sessions is found
   
