@@ -61,12 +61,14 @@ int main(int argc, char *argv[]){
   Board *board = new Board(startPegPos, boardSize);
   board->createBoard();
   //  board->start();
-  
+
   board->printInformation();
   board->checkAdjacent();
   std::cout << board->displayBoard() << std::endl;
   std::cout << board->displaySpaces() << std::endl;
 
+  
+  
   //TODO: start algorithm to find empty spaces and move pieces around
   /*
   thinking space

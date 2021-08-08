@@ -98,13 +98,13 @@ std::string Board::displayBoard(){
       output.append("   ");
     }
     //Show peg placement using spaces vector
-    for(int j = 0; j < i; j++){
-      if(!spaces[k]->getEmpty()){
+    for(int j = 0; j < i; j++){   
+      if(!spaces[k + 1]->getEmpty()){
         output.append("[*]   ");
       }
       else{
         output.append("[ ]   ");
-      }
+        }
       k++;
     }
     output.append("\n");
