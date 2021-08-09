@@ -21,7 +21,7 @@ class Board {
   Board(int startingSpace = 1, int boardSize = 3);
   void createBoard();
   std::vector<int> findSpaces();
-  int checkAdjacent();
+  std::vector<int> checkAdjacent(Space *space);
   void recordMoves();
   std::string displayBoard();
   std::string displaySpaces();

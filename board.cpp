@@ -72,11 +72,19 @@ std::vector<int> Board::findSpaces(){
   return emptySpaces;
 }
 
-int Board::checkAdjacent(){
-
-  //TODO: FILL IN 
+std::vector<int> Board::checkAdjacent(Space *space){
+  std::vector<int> temp;
   
-  return 0;
+  //Get all valid adjacent spaces that are not empty
+  for(int j = 0; j < 6; j++){       
+    if(space->getAdjacentSpace()[static_cast<Position>(j)] != 0 &&
+	   !spaces[space->getAdjacentSpace()[static_cast<Position>(j)]
+               ]->getEmpty()){
+	  temp.push_back(space->getAdjacentSpace()[static_cast<Position>(j)]);
+    }
+  }
+  
+  return temp;
 }
 
 void Board::recordMoves(){
@@ -223,15 +231,8 @@ void Board::start(){
     firstSpace = spaces[destPos];
     std::cout << "destPos = " << destPos << std::endl;
         
-    //Get all valid adjacent spaces that are not empty
-    for(int j = 0; j < 6; j++){       
-      if(firstSpace->getAdjacentSpace()[static_cast<Position>(j)] != 0 &&
-         !spaces[firstSpace->getAdjacentSpace()[static_cast<Position>(j)]
-                 ]->getEmpty()){
-        validAdjacentPos.push_back(firstSpace->getAdjacentSpace()
-                                   [static_cast<Position>(j)]);
-      }
-    }
+    //Get all valid adjacent spaces that are not empty   
+	validAdjacentPos = checkAdjacent(firstSpace);
     
     //Loop until a valid, non-empty adjacent space is found
     while(validAdjacentPos.size() > 0){
