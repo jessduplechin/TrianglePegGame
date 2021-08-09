@@ -203,21 +203,21 @@ Position Board::getSpaceCorrelation(int orig, int dest){
 }
 
 void Board::start(){
-  srand(time(0));
   int origPos;
   int betweenPos;
   int destPos;
   bool possibleMoves;
   std::vector<int> emptySpaces;
-    
+
+  srand(time(0));
   emptySpaces = findSpaces();
   
   for(int i = 0; i < emptySpaces.size(); i++){
     Space *firstSpace;
     Space *adjacentSpace;
     std::vector<int> validAdjacentPos;
-    int position;
-	int randomIndex;
+    Position position;
+    int randomIndex;
           
     destPos = emptySpaces.at(i);
     firstSpace = spaces[destPos];
@@ -233,11 +233,11 @@ void Board::start(){
       }
     }
     
-    //Skip if there are no valid, empty adjacent spaces
-    //if(validAdjacentPos.size() > 0){
+    //Loop until a valid, non-empty adjacent space is found
     while(validAdjacentPos.size() > 0){
+
       //Get an adjacent space chosen at random
-	  randomIndex = rand() % validAdjacentPos.size();
+      randomIndex = rand() % validAdjacentPos.size();
       betweenPos = validAdjacentPos.at(randomIndex);
       adjacentSpace = spaces[betweenPos];      
 
@@ -247,7 +247,7 @@ void Board::start(){
 
       //Get valid secondary adjacent space using same position
       //as first adjacent space
-      origPos = adjacentSpace->getAdjacentSpace()[static_cast<Position>(position)];
+      origPos = adjacentSpace->getAdjacentSpace()[position];
       std::cout << "origPos = " << origPos << std::endl;
       std::cout << "position = " << position << std::endl;
       if(origPos != 0){
@@ -256,20 +256,19 @@ void Board::start(){
           moves.push_back(new Move(origPos, destPos));
           std::cout << displayMoves() << std::endl;
           std::cout << displayBoard() << std::endl;
-		  break;
+	  break;
         }
         else{
           std::cout << "The origPos was empty. Skipping..." << std::endl;
-		  validAdjacentPos.erase(randomIndex);
+	  validAdjacentPos.erase(validAdjacentPos.begin() + randomIndex);
         }
       }
       else{
         std::cout << "The origPos was invalid. Skipping..." << std::endl;
-		validAdjacentPos.erase(randomIndex);
+	validAdjacentPos.erase(validAdjacentPos.begin() + randomIndex);
       }
 
-	}//while - end
-    //}//if(..size() > 0) - end
+    }//while - end
   }//for - end
   
 }
