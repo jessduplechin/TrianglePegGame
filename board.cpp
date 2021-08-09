@@ -57,34 +57,33 @@ void Board::createBoard(){
       space->removeSpace(LR);
     }
     space->setAdjacentSpace(this->boardSize, this->totalSpaces);
-    //spaces.push_back(space);
     spaces[i] = space;
   }//for - end
 }
 
-int Board::findSpaces(){
-  //TODO: FIGURE OUT ALGORITHM HERE
-  return 0;
+std::vector<int> Board::findSpaces(){  
+  std::vector<int> emptySpaces;
+
+  for(int i = 1; i <= this->totalSpaces; i++){
+    if(spaces[i]->getEmpty()){
+      emptySpaces.push_back(i);
+    }
+  }
+  return emptySpaces;
 }
 
-int Board::checkAdjacent(){
-
-  //TODO: MOVE THIS SOMEWHERE ELSE. THIS IS TEMPORARY TO DEMO 
-  // THE resetBoard FUNCTION.
-  /*std::cout << "jumping peg from pos 4 to pos 1" << std::endl;
-  updateSpaces(4, 4, 1);
-  updateSpaces(4, 1, 4);
-  updateSpaces(1, 4, 4);
-  updateSpaces(4, 4, 4);
-  //update spaces  
-  updateSpaces(4, 2, 1);
-  updateSpaces(9, 5, 2);
-*/
-  //add test moves to moves array
-	moves.push_back(new Move(3, 4));
-	moves.push_back(new Move(10, 2));
-	moves.push_back(new Move(7, 6));
-  return 0;
+std::vector<int> Board::checkAdjacent(Space *space){
+  std::vector<int> temp;
+  
+  //Get all valid adjacent spaces that are not empty
+  for(Position pos : {UL, UR, L, R, LL, LR}){  
+    if(space->getAdjacentSpace()[pos] != 0 &&
+	   !spaces[space->getAdjacentSpace()[pos]]->getEmpty()){
+	  temp.push_back(space->getAdjacentSpace()[pos]);
+    }
+  }
+  
+  return temp;
 }
 
 void Board::recordMoves(){
@@ -108,7 +107,7 @@ std::string Board::displayBoard(){
       }
       else{
         output.append("[ ]   ");
-        }
+      }
       k++;
     }
     output.append("\n");
@@ -145,8 +144,8 @@ std::string Board::displayMoves(){
   
   for(std::vector<Move*>::iterator i = moves.begin(); 
       i != moves.end(); i++){
-	  output.append(std::to_string((*i)->getOrigin()) + " -> " +
-	                std::to_string((*i)->getDestination()) + "\n");
+    output.append(std::to_string((*i)->getOrigin()) + " -> " +
+                  std::to_string((*i)->getDestination()) + "\n");
   }
   
   return output;
@@ -163,10 +162,10 @@ void Board::printInformation(){
     boardFile << displaySpaces();
     boardFile << "----------------------------------------\n";
     
-	movesFile << displayMoves();
-	//TODO: ADD OTHER THINGS TO DISPLAY: SOLUTIONS    
+    movesFile << displayMoves();
+    //TODO: ADD OTHER THINGS TO DISPLAY: SOLUTIONS    
     boardFile.close();
-	movesFile.close();
+    movesFile.close();
   }
   else{
     std::cout << "Error - Couldn't open file" << std::endl;
@@ -186,7 +185,9 @@ void Board::resetBoard(){
 }
 
 void Board::updateSpaces(int origin, int between, int destination){
-  if(origin == between || origin == destination || between == destination){
+  if(origin == between ||
+     origin == destination ||
+     between == destination){
     std::cout << "Error - origin, between, or destination are same values" << std::endl;
     return;
   }
@@ -196,3 +197,78 @@ void Board::updateSpaces(int origin, int between, int destination){
   spaces[destination]->setEmpty(false);
 }
 
+Position Board::getSpaceCorrelation(int orig, int dest){
+  Position correlation;
+  
+  for(Position pos : {UL, UR, L, R, LL, LR}){
+    if(spaces[orig]->getAdjacentSpace()[pos] == dest){
+      correlation = pos;
+      break;
+    }
+  }
+  return correlation;
+}
+
+void Board::start(){
+  int origPos;
+  int betweenPos;
+  int destPos;
+  bool possibleMoves;
+  std::vector<int> emptySpaces;
+
+  srand(time(0));
+  emptySpaces = findSpaces();
+  
+  for(int i = 0; i < emptySpaces.size(); i++){
+    Space *firstSpace;
+    Space *adjacentSpace;
+    std::vector<int> validAdjacentPos;
+    Position position;
+    int randomIndex;
+          
+    destPos = emptySpaces.at(i);
+    firstSpace = spaces[destPos];
+    std::cout << "destPos = " << destPos << std::endl;
+        
+    //Get all valid adjacent spaces that are not empty   
+    validAdjacentPos = checkAdjacent(firstSpace);
+    
+    //Loop until a valid, non-empty adjacent space is found
+    while(validAdjacentPos.size() > 0){
+
+      //Get an adjacent space chosen at random
+      randomIndex = rand() % validAdjacentPos.size();
+      betweenPos = validAdjacentPos.at(randomIndex);
+      adjacentSpace = spaces[betweenPos];      
+
+      std::cout << "betweenPos = " << betweenPos << std::endl;
+
+      position = getSpaceCorrelation(destPos, betweenPos);
+
+      //Get valid secondary adjacent space using same position
+      //as first adjacent space
+      origPos = adjacentSpace->getAdjacentSpace()[position];
+      std::cout << "origPos = " << origPos << std::endl;
+      std::cout << "position = " << position << std::endl;
+      if(origPos != 0){
+        if(!spaces[origPos]->getEmpty()){
+          updateSpaces(origPos, betweenPos, destPos);
+          moves.push_back(new Move(origPos, destPos));
+          std::cout << displayMoves() << std::endl;
+          std::cout << displayBoard() << std::endl;
+          break;
+        }
+        else{
+          std::cout << "The origPos was empty. Skipping..." << std::endl;
+          validAdjacentPos.erase(validAdjacentPos.begin() + randomIndex);
+        }
+      }
+      else{
+        std::cout << "The origPos was invalid. Skipping..." << std::endl;
+        validAdjacentPos.erase(validAdjacentPos.begin() + randomIndex);
+      }
+
+    }//while - end
+  }//for - end
+  
+}

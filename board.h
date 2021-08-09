@@ -20,8 +20,8 @@ class Board {
  public:
   Board(int startingSpace = 1, int boardSize = 3);
   void createBoard();
-  int findSpaces();
-  int checkAdjacent();
+  std::vector<int> findSpaces();
+  std::vector<int> checkAdjacent(Space *space);
   void recordMoves();
   std::string displayBoard();
   std::string displaySpaces();
@@ -29,6 +29,9 @@ class Board {
   void printInformation();
   void resetBoard();
   void updateSpaces(int origin, int between, int destination);
+  Position getSpaceCorrelation(int orig, int dest);
+  void start();
+  
   
  private:
   int boardSize;
