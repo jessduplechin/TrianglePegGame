@@ -232,7 +232,7 @@ void Board::start(){
     std::cout << "destPos = " << destPos << std::endl;
         
     //Get all valid adjacent spaces that are not empty   
-	validAdjacentPos = checkAdjacent(firstSpace);
+    validAdjacentPos = checkAdjacent(firstSpace);
     
     //Loop until a valid, non-empty adjacent space is found
     while(validAdjacentPos.size() > 0){
@@ -257,16 +257,16 @@ void Board::start(){
           moves.push_back(new Move(origPos, destPos));
           std::cout << displayMoves() << std::endl;
           std::cout << displayBoard() << std::endl;
-	  break;
+          break;
         }
         else{
           std::cout << "The origPos was empty. Skipping..." << std::endl;
-	  validAdjacentPos.erase(validAdjacentPos.begin() + randomIndex);
+          validAdjacentPos.erase(validAdjacentPos.begin() + randomIndex);
         }
       }
       else{
         std::cout << "The origPos was invalid. Skipping..." << std::endl;
-	validAdjacentPos.erase(validAdjacentPos.begin() + randomIndex);
+        validAdjacentPos.erase(validAdjacentPos.begin() + randomIndex);
       }
 
     }//while - end
