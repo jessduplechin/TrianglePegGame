@@ -76,11 +76,10 @@ std::vector<int> Board::checkAdjacent(Space *space){
   std::vector<int> temp;
   
   //Get all valid adjacent spaces that are not empty
-  for(int j = 0; j < 6; j++){       
-    if(space->getAdjacentSpace()[static_cast<Position>(j)] != 0 &&
-	   !spaces[space->getAdjacentSpace()[static_cast<Position>(j)]
-               ]->getEmpty()){
-	  temp.push_back(space->getAdjacentSpace()[static_cast<Position>(j)]);
+  for(Position pos : {UL, UR, L, R, LL, LR}){  
+    if(space->getAdjacentSpace()[pos] != 0 &&
+	   !spaces[space->getAdjacentSpace()[pos]]->getEmpty()){
+	  temp.push_back(space->getAdjacentSpace()[pos]);
     }
   }
   
@@ -200,10 +199,10 @@ void Board::updateSpaces(int origin, int between, int destination){
 
 Position Board::getSpaceCorrelation(int orig, int dest){
   Position correlation;
-  for(int i = 0; i < 6; i++){
-    if(spaces[orig]->getAdjacentSpace()
-       [static_cast<Position>(i)] == dest){
-      correlation = static_cast<Position>(i);
+  
+  for(Position pos : {UL, UR, L, R, LL, LR}){
+    if(spaces[orig]->getAdjacentSpace()[pos] == dest){
+      correlation = pos;
       break;
     }
   }
