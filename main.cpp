@@ -61,13 +61,11 @@ int main(int argc, char *argv[]){
   Board *board = new Board(startPegPos, boardSize);
   board->createBoard();
 
-  //board->updateSpaces(4, 2, 1);
-  //board->updateSpaces(9, 5, 2);
-
-  //for(int i = 0; i < 20; i++){
-	board->startSimulation();
-	board->resetBoard();
- // }
+  for(int i = 0; i < 20; i++){
+    board->startSimulation();
+    std::cout << board->displayBoard() << std::endl;
+    board->resetBoard();
+  }
 
   //TODO: ADD NEW FUNCTION TO DETERMINE WHICH SET OF MOVES IS THE BEST SOLUTION.
   //board->returnBestSolution();
