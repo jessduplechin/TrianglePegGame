@@ -65,7 +65,7 @@ int main(int argc, char *argv[]){
   //board->updateSpaces(9, 5, 2);
 
   //for(int i = 0; i < 20; i++){
-	board->start();
+	board->startSimulation();
 	board->resetBoard();
  // }
 
