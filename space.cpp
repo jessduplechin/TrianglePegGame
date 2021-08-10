@@ -85,7 +85,7 @@ void Space::setAdjacentSpace(int boardSize, int totalSpaces){
         adjacentSpace[pos] = (this->position + row) + 1;
         break;
       default:
-        adjacentSpace[pos] = 100;
+        adjacentSpace[pos] = 888;
         break;
       }
     }//if - end
