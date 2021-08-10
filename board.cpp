@@ -147,11 +147,11 @@ std::string Board::displaySpaces(){
   return output;
 }
 
-std::string Board::displayMoves(){
+std::string Board::displayMoves(std::vector<Move*> m){
   std::string output;
   
-  for(std::vector<Move*>::iterator i = moves.begin(); 
-      i != moves.end(); i++){
+  for(std::vector<Move*>::iterator i = m.begin(); 
+      i != m.end(); i++){
     output.append(std::to_string((*i)->getOrigin()) + " -> " +
                   std::to_string((*i)->getDestination()) + "\n");
   }
@@ -159,21 +159,33 @@ std::string Board::displayMoves(){
   return output;
 }
 
+std::string Board::displaySolutions(){
+  std::string output;
+  
+  for(int i = 0; i < solutions.size(); i++){
+    output.append("Solution: " + std::to_string(i + 1) + "\n");
+	output.append("Number of Pegs remaining: " + solutions.at(i)->getPegs() + "\n");
+	output.append("Moves:\n");
+	output.append(displayMoves(solutions.at(i)->getMoves()));
+	output.append("==========================================\n");
+  }		  
+}
+
 void Board::printInformation(){
   //Print everything onto text files
   std::ofstream boardFile("board.txt");
-  std::ofstream movesFile("moves.txt");
+  std::ofstream solutionFile("solutions.txt");
   
-  if(boardFile.is_open() && movesFile.is_open()){
+  if(boardFile.is_open() && solutionFile.is_open()){
     boardFile << displayBoard();
     boardFile << "----------------------------------------\n";
     boardFile << displaySpaces();
     boardFile << "----------------------------------------\n";
     
-    movesFile << displayMoves();
-    //TODO: ADD OTHER THINGS TO DISPLAY: SOLUTIONS    
+    solutionFile << displaySolutions();
+    
     boardFile.close();
-    movesFile.close();
+    solutionFile.close();
   }
   else{
     std::cout << "Error - Couldn't open files" << std::endl;

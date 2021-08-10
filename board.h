@@ -26,7 +26,8 @@ class Board {
   void recordMoves();
   std::string displayBoard();
   std::string displaySpaces();
-  std::string displayMoves();
+  std::string displayMoves(std::vector<Move*> m = this->moves);
+  std::string displaySolutions();
   void printInformation();
   void resetBoard();
   void updateSpaces(int origin, int between, int destination);
