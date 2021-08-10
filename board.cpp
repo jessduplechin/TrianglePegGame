@@ -149,13 +149,17 @@ std::string Board::displaySpaces(){
 
 std::string Board::displayMoves(std::vector<Move*> m){
   std::string output;
-  
-  for(std::vector<Move*>::iterator i = m.begin(); 
-      i != m.end(); i++){
-    output.append(std::to_string((*i)->getOrigin()) + " -> " +
-                  std::to_string((*i)->getDestination()) + "\n");
+
+  if(!m.empty()){
+    for(std::vector<Move*>::iterator i = m.begin(); 
+        i != m.end(); i++){
+      output.append(std::to_string((*i)->getOrigin()) + " -> " +
+                    std::to_string((*i)->getDestination()) + "\n");
+    }
   }
-  
+  else{
+    std::cout << "Error - Moves vector is empty" << std::endl;
+  }
   return output;
 }
 
@@ -164,11 +168,13 @@ std::string Board::displaySolutions(){
   
   for(int i = 0; i < solutions.size(); i++){
     output.append("Solution: " + std::to_string(i + 1) + "\n");
-	output.append("Number of Pegs remaining: " + solutions.at(i)->getPegs() + "\n");
-	output.append("Moves:\n");
-	output.append(displayMoves(solutions.at(i)->getMoves()));
-	output.append("==========================================\n");
-  }		  
+    output.append("Number of Pegs remaining: " +
+                  std::to_string(solutions.at(i)->getPegs()) + "\n");
+    output.append("Moves:\n");
+    output.append(displayMoves(solutions.at(i)->getMoves()));
+    output.append("==========================================\n");
+  }
+  return output;
 }
 
 void Board::printInformation(){
@@ -279,7 +285,6 @@ void Board::startSimulation(){
 			  //Record the move and go to next empty space
 			  moves.push_back(new Move(origPos, destPos));
 			  repeat |= true;
-			  std::cout << displayBoard() << std::endl;
 			  break;
 			}
 			else{
