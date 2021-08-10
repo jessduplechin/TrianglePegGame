@@ -208,7 +208,7 @@ Position Board::getSpaceCorrelation(int orig, int dest){
   return correlation;
 }
 
-void Board::start(){
+void Board::startSimulation(){
   int origPos;
   int betweenPos;
   int destPos;
