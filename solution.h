@@ -11,14 +11,14 @@
 #include "move.h"
  
 class Solution {
-  public: 
-   Solution(std::vector<Move*>, int numPegs);
-   int getPegs();
-   std::vector<Move*> getMoves();
+public: 
+  Solution(std::vector<Move*>, int numPegs);
+  int getPegs();
+  std::vector<Move*> getMoves();
 
-  private:
-   std::vector<Move*> moves;
-   int remainingPegs;
+private:
+  std::vector<Move*> moves;
+  int remainingPegs;
 };
  
  
