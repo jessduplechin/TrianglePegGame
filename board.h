@@ -32,8 +32,7 @@ class Board {
   void updateSpaces(int origin, int between, int destination);
   Position getSpaceCorrelation(int orig, int dest);
   void start();
-  
-  
+    
  private:
   int boardSize;
   int startingSpace;
@@ -42,6 +41,5 @@ class Board {
   std::map<int, Space*> spaces;
   std::vector<Solution*> solutions;
 };
-
 
 #endif 
