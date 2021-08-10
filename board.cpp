@@ -86,7 +86,16 @@ std::vector<int> Board::checkAdjacent(Space *space){
 }
 
 void Board::recordMoves(){
-  //TODO: FILL IN
+  int remainingPegs = 0;
+  
+  //Add up all remaining number of pegs on board
+  for(int i = 1; i <= this->totalSpaces; i++){
+	  if(!spaces[i]->getEmpty()){
+		  remainingPegs++;
+	  }
+  }
+  
+  solutions.push_back(new Solution(moves, remainingPegs));
 }
 
 std::string Board::displayBoard(){
@@ -181,6 +190,9 @@ void Board::resetBoard(){
       spaces[i]->setEmpty(true);
     }
   }//for - end
+  
+  //delete everything in moves vector
+  moves.clear();
 }
 
 void Board::updateSpaces(int origin, int between, int destination){
@@ -216,10 +228,7 @@ void Board::start(){
   std::vector<int> emptySpaces;
 
   srand(time(0));
-    
-  //TODO: ADD LOOP SO THAT IT'LL GO THROUGH EMPTY SPACES UNTIL
-  //      NO MORE MOVES ARE POSSIBLE.
-  //PROBLEM: WHAT CONDITION DO I USE TO KNOW THAT THERE ARE NO MORE MOVES TO MAKE?
+      
   while(possibleMoves){
 	  bool repeat = false;
 	  emptySpaces = findSpaces();
@@ -232,8 +241,7 @@ void Board::start(){
 		int randomIndex;
 			  
 		destPos = emptySpaces.at(i);
-		firstSpace = spaces[destPos];
-		std::cout << "destPos = " << destPos << std::endl;
+		firstSpace = spaces[destPos];		
 			
 		//Get all valid adjacent spaces that are not empty   
 		validAdjacentPos = checkAdjacent(firstSpace);
@@ -246,15 +254,11 @@ void Board::start(){
 		  betweenPos = validAdjacentPos.at(randomIndex);
 		  adjacentSpace = spaces[betweenPos];      
 
-		  std::cout << "betweenPos = " << betweenPos << std::endl;
-
 		  position = getSpaceCorrelation(destPos, betweenPos);
 
 		  //Get valid secondary adjacent space using same position
 		  //as first adjacent space
 		  origPos = adjacentSpace->getAdjacentSpace()[position];
-		  std::cout << "origPos = " << origPos << std::endl;
-		  std::cout << "position = " << position << std::endl;
 		  if(origPos != 0){
 			if(!spaces[origPos]->getEmpty()){
 			  //Move peg to new destination
@@ -262,21 +266,18 @@ void Board::start(){
 			  
 			  //Record the move and go to next empty space
 			  moves.push_back(new Move(origPos, destPos));
-			  std::cout << displayMoves() << std::endl;
-			  std::cout << displayBoard() << std::endl;
 			  repeat |= true;
+			  std::cout << displayBoard() << std::endl;
 			  break;
 			}
 			else{
 			  //Remove from vector and try a different adjacent space
-			  std::cout << "The origPos was empty. Skipping..." << std::endl;
 			  validAdjacentPos.erase(validAdjacentPos.begin() + randomIndex);
 			  repeat |= false;
 			}
 		  }
 		  else{
 			//Remove from vector and try a different adjacent space
-			std::cout << "The origPos was invalid. Skipping..." << std::endl;
 			validAdjacentPos.erase(validAdjacentPos.begin() + randomIndex);
 			repeat |= false;
 		  }
@@ -287,4 +288,6 @@ void Board::start(){
 	  //Update
       possibleMoves = repeat;	  	  
   }//while(possibleMoves) - end
+  
+  recordMoves();
 }

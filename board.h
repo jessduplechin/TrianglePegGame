@@ -14,6 +14,7 @@
 #include <vector>
 #include "move.h"
 #include "space.h"
+#include "solution.h"
 #include <string>
 
 class Board {
@@ -39,7 +40,7 @@ class Board {
   int totalSpaces;  
   std::vector<Move*> moves;
   std::map<int, Space*> spaces;
-  std::vector<std::vector<Move*>> solutions;
+  std::vector<Solution*> solutions;
 };
 
 
