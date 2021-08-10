@@ -269,6 +269,7 @@ void Board::startSimulation(){
 
 		  //Get an adjacent space chosen at random
 		  randomIndex = rand() % validAdjacentPos.size();
+		  std::cout << "randomIndex = " << randomIndex << std::endl;
 		  betweenPos = validAdjacentPos.at(randomIndex);
 		  adjacentSpace = spaces[betweenPos];      
 

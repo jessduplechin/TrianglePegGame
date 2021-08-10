@@ -61,32 +61,20 @@ int main(int argc, char *argv[]){
   Board *board = new Board(startPegPos, boardSize);
   board->createBoard();
 
-  for(int i = 0; i < 20; i++){
-    board->startSimulation();
-    std::cout << board->displayBoard() << std::endl;
-    board->resetBoard();
-  }
+  board->startSimulation();
+  std::cout << board->displayBoard() << std::endl;
+  board->resetBoard();
+  std::cout << "----------------------------" << std::endl;
+  board->startSimulation();
+  std::cout << board->displayBoard() << std::endl;
+  board->resetBoard();
 
   //TODO: ADD NEW FUNCTION TO DETERMINE WHICH SET OF MOVES IS THE BEST SOLUTION.
   //board->returnBestSolution();
   
   board->printInformation();
   
-  //TODO: start algorithm to find empty spaces and move pieces around
-  /*
-  thinking space
-  1) use for loop and go through all spaces 
-  2) if space is empty, then check adjacent spaces for emptiness. 
-  3) if adjacent space is not empty, then check its secondary adjacent space for emptiness.
-  4) if secondary adjacent space is not empty, then jump that occupied space to first space found. 
-  5) repeat until no more moves can be done.
-  6) Repeat until shortest path of all game sessions is found
-  
-  Issues: how to check which adjacent space first? Otherwise it'll take the first adjacent space it sees
-          which will always be the same for every new run which will create the same singular result. 
-                  
-  Possible resolutions: Use random number generator to change which adjacent space to check          
-  */
+  //TODO: FIGURE OUT WHY THE SAME SOLUTIONS ARE BEING REPEATED..
   
   std::cout << "Exiting..." << std::endl;
 }
