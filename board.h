@@ -21,17 +21,9 @@ class Board {
  public:
   Board(int startingSpace = 1, int boardSize = 3);
   void createBoard();
-  std::vector<int> findSpaces();
-  std::vector<int> checkAdjacent(Space *space);
-  void recordMoves();
   std::string displayBoard();
-  std::string displaySpaces();
-  std::string displayMoves(std::vector<Move*> m);
-  std::string displaySolutions();
   void printInformation();
   void resetBoard();
-  void updateSpaces(int origin, int between, int destination);
-  Position getSpaceCorrelation(int orig, int dest);
   void startSimulation();
 
  private:
@@ -41,6 +33,15 @@ class Board {
   std::vector<Move*> moves;
   std::map<int, Space*> spaces;
   std::vector<Solution*> solutions;
+
+  std::vector<int> findSpaces();
+  std::vector<int> checkAdjacent(Space *space);
+  void recordMoves();
+  std::string displaySpaces();
+  std::string displayMoves(std::vector<Move*> m);
+  std::string displaySolutions();
+  void updateSpaces(int origin, int between, int destination);
+  Position getSpaceCorrelation(int orig, int dest);
 };
 
 #endif 

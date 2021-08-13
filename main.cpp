@@ -54,6 +54,7 @@ int main(int argc, char *argv[]){
   }
   
   //Creation
+  srand((unsigned)time(0));
   std::cout << "Board size = " << boardSize << std::endl;
   std::cout << "Starting peg position = " << startPegPos << std::endl;
   std::cout << "Creating board..." << std::endl;
@@ -63,20 +64,13 @@ int main(int argc, char *argv[]){
 
   board->startSimulation();
   std::cout << board->displayBoard() << std::endl;
-  board->resetBoard();
-  std::cout << "----------------------------" << std::endl;
-  board->startSimulation();
-  std::cout << board->displayBoard() << std::endl;
-  board->resetBoard();
 
   //TODO: ADD NEW FUNCTION TO DETERMINE WHICH SET OF MOVES IS THE BEST SOLUTION.
   //board->returnBestSolution();
   
   board->printInformation();
   
-  //TODO: FIGURE OUT WHY THE SAME SOLUTIONS ARE BEING REPEATED..
-  
-  std::cout << "Exiting..." << std::endl;
+  std::cout << "Done!" << std::endl;
 }
 
 bool checkArguments(const char *str){

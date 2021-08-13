@@ -266,6 +266,7 @@ void Board::startSimulation(){
       while(validAdjacentPos.size() > 0){
 
         //Get an adjacent space chosen at random
+	//TODO: CHANGE THIS ALGORITHM. IT DOESN'T WORK. BOO....TT_TT
         randomIndex = rand() % validAdjacentPos.size();
         betweenPos = validAdjacentPos.at(randomIndex);
         adjacentSpace = spaces[betweenPos];      
